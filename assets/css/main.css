@@ -1,0 +1,39 @@
+.jumbotron{
+    padding-bottom: 5px; 
+    padding-top: 5px;
+    text-align: center;
+}
+h4{
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.input-group-text{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: #f0f0f5;
+}
+.input-group-text.user{
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+}
+.container-fluid{
+    width: 90%;
+    text-align: center;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.login-container{
+    border: solid 2px lightgray;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 40%;
+    border-radius: 10px;
+    display: inline-block
+}
+.col.padding{
+    padding-bottom: 1rem;
+}

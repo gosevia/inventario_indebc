@@ -19,6 +19,6 @@
     <div class="container-fluid">
         <div class="jumbotron">
             <p class="lead">
-                <img src="<?php echo 'http://www.indebc.gob.mx/main/img/logoOficial.png'; ?>" width="300" />
+                <img src="<?php echo 'http://www.indebc.gob.mx/main/img/logoOficial.png'; ?>" width="200" />
             </p>    
         </div>

@@ -5,7 +5,6 @@
             $this->load->view('login');
             $this->load->view('footer');
         }
-
         public function register(){
             $data['title'] = 'Registrar';
 

@@ -1,7 +1,7 @@
         <div class="register-container">
             <h2><?= $title; ?></h2>
             <?php echo validation_errors(); ?>
-            <?php echo form_open('user/register'); ?>
+            <?php echo form_open('index.php'); ?>
                 <div class ="form-group">
                     <!--<label>Nombre</label>-->
                     <input type="text" class="form-control" name="nombre" placeholder="Nombre">

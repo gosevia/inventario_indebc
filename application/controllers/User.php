@@ -5,6 +5,7 @@
             $this->load->view('login');
             $this->load->view('footer');
         }
+        
         public function register(){
             $data['title'] = 'Registrar';
 
@@ -26,7 +27,14 @@
                 die('Continue');
             }
         }
+
         public function login(){
             
+        }
+
+        public function admin(){
+            $this->load->view('header');
+            $this->load->view('admin/admin');
+            $this->load->view('footer');
         }
     }

@@ -2,7 +2,7 @@
             <br />
             <div class="login-container">
                 <h4><strong>INDEBC | SISTEMA DE INVENTARIO</strong></h4>
-                <?php echo form_open('index.php/user/register'); ?>
+                <?php echo form_open('index.php/user/login'); ?>
                     <div class="row">
                         <div class="col-md col-md-offset-4">
                             <div class="input-group mb-3">
@@ -11,7 +11,7 @@
                             </div>
                             <div class="input-group mb-4">
                                 <span class="input-group-text"><i id="lock" class="fa fa-lock fa-lg"></i></span>
-                                <input type="password" class="form-control" name="password" placeholder="Contraseña">
+                                <input type="password" class="form-control" name="password" placeholder="Contraseña" value="<?php echo set_value('password');?>">
                             </div>
                         </div>
                     </div>

@@ -29,7 +29,34 @@
         }
 
         public function login(){
-            
+           
+            $this->form_validation->set_rules('rfc','RFC','required');
+            $this->form_validation->set_rules('password','Password','required');
+
+            if($this->form_validation->run() === FALSE){
+                $this->load->view('header');
+                $this->load->view('login');
+                $this->load->view('footer');
+            }else{
+                
+                $username = $this->input->post('rfc');
+                $password = md5($this->input->post('password'));
+
+                print($username);
+                $user_id = $this->user_model->login($username, $password);
+
+                if($user_id){
+                    //Crear Sesion
+                    /*Linea de prueba
+                    die('SUCCESS');*/
+
+                    $this->session->set_flashdata('user_loggedin', 'Has ingresado al sistema');
+                    redirect('index.php/admin');
+                }else{
+                    $this->session->set_flashdata('login_failed', 'Clave o usuario incorrectos');
+                    redirect('index.php/user/login');
+                }
+            }
         }
 
         public function admin(){

@@ -22,3 +22,13 @@
                 <img src="<?php echo 'http://www.indebc.gob.mx/main/img/logoOficial.png'; ?>" width="300" />
             </p>    
         </div>
+<div class="container">
+
+<?php if($this->session->flashdata('login_failed')): ?>
+    <?php echo '<p class= "alert alert-danger">' .$this->session->flashdata('login_failed').'</p>'; ?>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('user_loggedin')): ?>
+    <?php echo '<p class= "alert alert-success">' .$this->session->flashdata('user_loggedin').'</p>'; ?>
+<?php endif; ?>
+</div>

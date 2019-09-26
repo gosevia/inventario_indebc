@@ -13,7 +13,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.6/datatables.min.js"></script>
-
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#solicitarTable').DataTable( {
+            "language": lang_spanish
+        });        
+    });
+    //<!-- para lenguaje español de la tabla -->
+    var lang_spanish = {
+        "sProcessing":     "Procesando...",
+        "sLengthMenu":     "Mostrar _MENU_ registros",
+        "sZeroRecords":    "No se encontraron resultados",
+        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+        "sInfoPostFix":    "",
+        "sSearch":         "Buscar:",
+        "sUrl":            "",
+        "sInfoThousands":  ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+            "sFirst":    "Primero",
+            "sLast":     "Último",
+            "sNext":     "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "oAria": {
+            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        }
+    }
+</script>
 </head>
 <body>
     <div class="container-fluid">
@@ -25,10 +56,22 @@
 <div class="container">
 
 <?php if($this->session->flashdata('login_failed')): ?>
-    <?php echo '<p class= "alert alert-danger">' .$this->session->flashdata('login_failed').'</p>'; ?>
+    <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>'.$this->session->flashdata('login_failed').'</p>'; ?>
 <?php endif; ?>
 
 <?php if($this->session->flashdata('user_loggedin')): ?>
-    <?php echo '<p class= "alert alert-success">' .$this->session->flashdata('user_loggedin').'</p>'; ?>
+    <?php echo '<p class="alert alert-success alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('user_loggedin').'</p>'; ?>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('user_loggedout')): ?>
+    <?php echo '<p class="alert alert-success alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('user_loggedout').'</p>'; ?>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('inactive_account')): ?>
+    <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('inactive_account').'</p>'; ?>
 <?php endif; ?>
 </div>

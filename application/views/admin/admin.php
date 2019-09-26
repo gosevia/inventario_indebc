@@ -26,6 +26,10 @@
             <a data-toggle="tab" class="dropdown-item" href="#prestamos_consultar">Consultar</a>
         </div>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url(); ?>index.php/user/logout">
+        <i class="fa fa-sign-out"></i> Cerrar Sesión</a>
+    </li>
 </ul>
 
  <!--CONTENIDO DE CADA UNA DE LAS TABS-->

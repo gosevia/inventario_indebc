@@ -18,4 +18,12 @@
                 return false;
             }
         }
+        public function getUserInfo($id){
+            $q = $this->db->get_where('usuario', array('idUsuario' => $id));
+            if($q->num_rows()==1){
+                return $q->result();
+            }else{
+                return false;
+            }
+        }
     }

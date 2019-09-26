@@ -38,27 +38,50 @@
                 $this->load->view('login');
                 $this->load->view('footer');
             }else{
-                
                 $username = $this->input->post('rfc');
                 $password = md5($this->input->post('password'));
-
-                print($username);
+                //print($username);
                 $user_id = $this->user_model->login($username, $password);
-
                 if($user_id){
-                    //Crear Sesion
-                    /*Linea de prueba
-                    die('SUCCESS');*/
-
-                    $this->session->set_flashdata('user_loggedin', 'Has ingresado al sistema');
-                    redirect('index.php/admin');
+                    $userInfo = $this->user_model->getUserInfo($user_id);
+                    // revisar si la cuenta está activa
+                    if($userInfo[0]->status == 1){
+                        // guardar info de sesión
+                        $user_data = array(
+                            'user_id' => $userInfo[0]->idUsuario,
+                            'rol' => $userInfo[0]->rol,
+                            'logged_in' => true
+                        );
+                        $this->session->set_userdata($user_data);
+                        switch($userInfo[0]->rol){
+                            case 1: redirect('index.php/admin'); break;
+                            case 2: redirect('index.php/admin'); break; // cambiar en el futuro
+                            case 3: redirect('index.php/admin'); break; // cambiar en el futuro
+                            default: redirect(base_url()); $this->session->set_flashdata('login_failed', 'Clave o usuario incorrectos');
+                        }
+                        // será necesario el mensaje de loggedin?
+                        //$this->session->set_flashdata('user_loggedin', 'Has ingresado al sistema');
+                    }else{
+                        $this->session->set_flashdata('inactive_account', 'Cuenta inactiva');
+                        redirect('index.php/user/login');    
+                    }
                 }else{
                     $this->session->set_flashdata('login_failed', 'Clave o usuario incorrectos');
                     redirect('index.php/user/login');
                 }
             }
         }
-
+        public function logout(){
+            if(!$this->session->userdata('logged_in')){
+                redirect(base_url().'index.php/user/login');
+            }
+            // Eliminar datos de usuario
+            $this->session->unset_userdata('user_id');
+            $this->session->unset_userdata('logged_in');
+            $this->session->unset_userdata('rol');
+            $this->session->set_flashdata('user_loggedout', 'Se ha cerrado la sessión.');
+            redirect(base_url().'index.php/user/login');
+        }
         public function admin(){
             $this->load->view('header');
             $this->load->view('admin/admin');

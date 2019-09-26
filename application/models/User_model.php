@@ -26,4 +26,9 @@
                 return false;
             }
         }
+        public function getArticulos(){
+            $q = $this->db->select('*')->from('articulo')->order_by('num_inventario', 'asc')->get();
+            $r = $q->result_array();
+            return $r;
+        }
     }

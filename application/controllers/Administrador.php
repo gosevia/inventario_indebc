@@ -9,8 +9,9 @@
             }else if($this->session->userdata('rol')==3){
                 redirect('index.php/empleado');
             }else{
+                $data['articulos'] = $this->user_model->getArticulos();
                 $this->load->view('header');
-                $this->load->view('admin/admin');
+                $this->load->view('admin/admin,'$data);
                 $this->load->view('footer');
             }
         }

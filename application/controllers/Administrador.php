@@ -2,8 +2,16 @@
     class Administrador extends CI_Controller{
 
         public function menu(){
-            $this->load->view('header');
-            $this->load->view('admin/admin');
-            $this->load->view('footer');
+            if(!$this->session->userdata('logged_in')){
+                redirect('index.php/user/login');
+            }else if($this->session->userdata('rol')==2){
+                redirect('index.php/soporte');
+            }else if($this->session->userdata('rol')==3){
+                redirect('index.php/empleado');
+            }else{
+                $this->load->view('header');
+                $this->load->view('admin/admin');
+                $this->load->view('footer');
+            }
         }
     }

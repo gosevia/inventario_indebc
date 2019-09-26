@@ -1,9 +1,19 @@
 <?php
     class User extends CI_Controller{
         public function index(){
-            $this->load->view('header');
-            $this->load->view('login');
-            $this->load->view('footer');
+
+            if(!$this->session->userdata('logged_in')){
+                $this->load->view('header');
+                $this->load->view('login');
+                $this->load->view('footer');
+            }else if($this->session->userdata('rol')==1){
+                redirect('index.php/admin');
+            }else if($this->session->userdata('rol')==2){
+                redirect('index.php/soporte');
+            }else{
+                redirect('index.php/empleado');
+            }
+            
         }
         
         public function register(){
@@ -29,7 +39,17 @@
         }
 
         public function login(){
-           
+
+            if($this->session->userdata('logged_in')){
+                if($this->session->userdata('rol')==1){
+                    redirect('index.php/admin');
+                }else if($this->session->userdata('rol')==2){
+                    redirect('index.php/soporte');
+                }else{
+                    redirect('index.php/empleado');
+                }
+            }
+
             $this->form_validation->set_rules('rfc','RFC','required');
             $this->form_validation->set_rules('password','Password','required');
 
@@ -55,8 +75,8 @@
                         $this->session->set_userdata($user_data);
                         switch($userInfo[0]->rol){
                             case 1: redirect('index.php/admin'); break;
-                            case 2: redirect('index.php/admin'); break; // cambiar en el futuro
-                            case 3: redirect('index.php/admin'); break; // cambiar en el futuro
+                            case 2: redirect('index.php/soporte'); break; // cambiar en el futuro
+                            case 3: redirect('index.php/empleado'); break; // cambiar en el futuro
                             default: redirect(base_url()); $this->session->set_flashdata('login_failed', 'Clave o usuario incorrectos');
                         }
                         // será necesario el mensaje de loggedin?
@@ -81,10 +101,5 @@
             $this->session->unset_userdata('rol');
             $this->session->set_flashdata('user_loggedout', 'Se ha cerrado la sessión.');
             redirect(base_url().'index.php/user/login');
-        }
-        public function admin(){
-            $this->load->view('header');
-            $this->load->view('admin/admin');
-            $this->load->view('footer');
         }
     }

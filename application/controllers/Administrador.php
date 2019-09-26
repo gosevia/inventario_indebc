@@ -11,7 +11,7 @@
             }else{
                 $data['articulos'] = $this->user_model->getArticulos();
                 $this->load->view('header');
-                $this->load->view('admin/admin,'$data);
+                $this->load->view('admin/admin',$data);
                 $this->load->view('footer');
             }
         }

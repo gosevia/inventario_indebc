@@ -46,3 +46,24 @@ h4{
 .col.padding{
     padding-bottom: 1rem;
 }
+#estado1{
+    color: white;
+    font-weight: bold;
+    background-color: #ff0000;
+}
+#estado2{
+    color: white;
+    font-weight: bold;
+    background-color: #ff9900;
+}
+#estado3{
+    color: white;
+    font-weight: bold;
+    background-color: #009933;
+}
+#articulos_consultar{
+    text-align: left;
+}
+#solicitarTable{
+    text-align: center;
+}

@@ -10,6 +10,8 @@
                 redirect('index.php/empleado');
             }else{
                 $data['articulos'] = $this->user_model->getArticulos();
+                $data['instalaciones'] = $this->user_model->getInstalaciones();
+                $data['categorias'] = $this->user_model->getCategorias();
                 $this->load->view('header');
                 $this->load->view('admin/admin',$data);
                 $this->load->view('footer');

@@ -31,4 +31,16 @@
             $r = $q->result_array();
             return $r;
         }
+
+        public function getInstalaciones(){
+            $q = $this->db->select('*')->from('instalacion')->order_by('instalacion','asc')->get();
+            $r = $q->result_array();
+            return $r;
+        }
+
+        public function getCategorias(){
+            $q = $this->db->select('*')->from('categoria')->order_by('nombre','asc')->get();
+            $r = $q->result_array();
+            return $r;
+        }
     }

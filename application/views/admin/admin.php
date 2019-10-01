@@ -5,7 +5,7 @@
         <a data-toggle="tab" class="nav-link" href="#reportes">Reportes</a>
     </li>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Articulos</a>
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Artículos</a>
         <div class="dropdown-menu">
             <a data-toggle="tab" class="dropdown-item" href="#articulos_consultar">Consultar</a>
             <a data-toggle="tab" class="dropdown-item" href="#articulos_registrar">Registrar</a>
@@ -20,7 +20,7 @@
         </div>
     </li>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Prestamos</a>
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Préstamos</a>
         <div class="dropdown-menu">
             <a data-toggle="tab" class="dropdown-item" href="#prestamos_registrar">Registrar</a>
             <a data-toggle="tab" class="dropdown-item" href="#prestamos_consultar">Consultar</a>
@@ -40,7 +40,6 @@
 
     <div id="reportes" class="tab-pane fade in active">
         <h3>Reportes</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     </div>
 
  <!--CONSULTAR ARTICULOS-->
@@ -100,17 +99,15 @@
     
  <!--REGISTRAR ARTICULOS-->
     <div id="articulos_registrar" class="tab-pane fade">
-        <h3>Registrar</h3>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <div class="register-container">
-            <h2>Registrar Articulo</h2>
+        <div class="register-container" style="margin:1rem; ">
+            <h2>Registrar artículo</h2>
             <?php echo validation_errors(); ?>
             <?php echo form_open('index.php/admin/'); ?>
                 <div class ="form-group">
-                    <input type="number" class="form-control" name="inventario" placeholder="Numero de inventario">
+                    <input type="number" class="form-control" name="inventario" placeholder="Número de inventario">
                 </div>
                 <div class ="form-group">
-                    <input type="text" class="form-control" name="serie" placeholder="Numero de serie">
+                    <input type="text" class="form-control" name="serie" placeholder="Número de serie">
                 </div>
                 <div class ="form-group">
                     <input type="text" class="form-control" name="marca" placeholder="Marca">
@@ -119,40 +116,41 @@
                     <input type="text" class="form-control" name="modelo" placeholder="Modelo">
                 </div>
                 <div class ="form-group">
-                    <label for="categoriaSelect" class="col-sm-2 control-label">Categoria</label>
+                    <label for="categoriaSelect" class="col-sm-2 control-label">Categoría</label>
                     <div>
+                    <!--REVISAR POR QUE NO CARGAN LAS CATEOGRIAS-->
                         <select id="categoriaSelect" class="form-control">
-                            <option>Categoria 1</option>
-                            <option>Categoria 2</option>
-                            <option>Categoria 3</option>
+                            <?php
+                                foreach($categorias as $row){
+                                    $categoria_name = $row['nombre'];
+                                    echo"<option value='$categoria_name'>$categoria_name</option>";
+                                }
+                            ?>
                         </select>
                     </div>                
                 </div>
                 <div class ="form-group">
                     <label for="complejoSelect" >Complejo o Municipio</label>
                     <div>
+                    <!-- CARGAR DIRECTAMENTE DE TABLA DE INSTALACIONES-->
                         <select id="complejoSelect" class="form-control">
-                            <option>CAR Tijuana</option>
-                            <option>CAR Mexicali</option>
-                            <option>Tecate</option>
-                            <option>Ensenada</option>
-                            <option>San Quintin</option>
+                            <?php
+                                foreach($instalaciones as $row){
+                                    $instalacion_name = $row['instalacion'];
+                                    echo"<option value='$instalacion_name'>$instalacion_name</option>";
+                                }
+                            ?>
                         </select>
-                    </div>                
+                    </div>           
                 </div>
                 <div class ="form-group">
-                <label for="direccionSelect" >Complejo o Municipio</label>
+                <label for="direccionSelect" >Dirección</label>
                     <div>
+                         <!-- CARGAR DIRECTAMENTE DE TABLA DE DIRECCIONES DEPENDIENDO DE LA INSTALACION-->
                         <select id="direccionSelect" class="form-control">
-                            <option>Medicina</option>
-                            <option>Administracion</option>
-                            <option>Villa Atletica</option>
+                            
                         </select>
                     </div>  
-                </div>
- <!--Falta implementar autocompletado con los empleados existentes-->
-                <div class ="form-group">
-                    <input type="text" class="form-control" name="empleado" placeholder="Empleado">
                 </div>
                 <div class ="form-group">
                     <label>Fecha de compra</label>

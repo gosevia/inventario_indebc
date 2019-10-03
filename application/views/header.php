@@ -74,4 +74,9 @@
     <?php echo '<p class="alert alert-danger alert-dismissible fade show">
     <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('inactive_account').'</p>'; ?>
 <?php endif; ?>
+
+<?php if($this->session->flashdata('articulo_registrado')): ?>
+    <?php echo '<p class="alert alert-success alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('articulo_registrado').'</p>'; ?>
+<?php endif; ?>
 </div>

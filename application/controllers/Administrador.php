@@ -45,7 +45,7 @@
 
         //Verificar si el Numero de inventario existe
         public function check_numInv_exists($numero){
-            $this->form_validation->set_message('check_numInv_exists','Ese numero de inventario ya ha sido capturado.
+            $this->form_validation->set_message('check_numInv_exists','Ese número de inventario ya ha sido capturado.
             Por favor ingresa otro');
             if($this->user_model->check_numInv_exists($numero)){
                 return true;
@@ -60,5 +60,17 @@
             $this->load->view('admin/admin');
             $this->load->view('user/consultar_articulo',$data);
             $this->load->view('footer');
+        }
+
+        public function registrar_prestamo(){
+    
+            if($this->form_validation->run() === FALSE){
+                $this->load->view('header');
+                $this->load->view('admin/admin');
+                $this->load->view('user/registrar_prestamo');
+                $this->load->view('footer');
+            }else{
+                
+            }
         }
     }

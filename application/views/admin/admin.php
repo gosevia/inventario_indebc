@@ -26,7 +26,7 @@
     <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Préstamos</a>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Registrar</a>
+      <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/admin/registrar_prestamo">Registrar</a>
       <a class="dropdown-item" href="#">Consultar</a>
     </div>
     </li>

@@ -4,21 +4,21 @@
             <?php echo validation_errors(); ?>
             <?php echo form_open('index.php/admin/registrar_articulo'); ?>
                 <div class ="form-group">
-                    <input type="number" class="form-control" name="inventario" placeholder="Número de inventario">
+                    <input type="number" class="form-control" name="inventario" placeholder="Número de inventario"value="<?php echo set_value('inventario');?>">
                 </div>
                 <div class ="form-group">
-                    <input type="text" class="form-control" name="serie" placeholder="Número de serie">
+                    <input type="text" class="form-control" name="serie" placeholder="Número de serie"value="<?php echo set_value('serie');?>">
                 </div>
                 <div class ="form-group">
-                    <input type="text" class="form-control" name="marca" placeholder="Marca">
+                    <input type="text" class="form-control" name="marca" placeholder="Marca" value="<?php echo set_value('marca');?>">
                 </div>
                 <div class ="form-group">
-                    <input type="text" class="form-control" name="modelo" placeholder="Modelo">
+                    <input type="text" class="form-control" name="modelo" placeholder="Modelo" value="<?php echo set_value('modelo');?>">
                 </div>
                 <div class ="form-group">
                     <label for="categoriaSelect" class="col-sm-2 control-label">Categoría</label>
                     <div>
-                        <select id="categoriaSelect" class="form-control" name="categoria">
+                        <select id="categoriaSelect" class="form-control" name="categoria" value="<?php echo set_value('categoria');?>">
                             <option></option>
                             <?php
                                 foreach($categorias as $row){
@@ -33,7 +33,7 @@
                     <label for="complejoSelect" >Instalación</label>
                     <div>
                     <!-- CARGAR DIRECTAMENTE DE TABLA DE INSTALACIONES-->
-                        <select id="complejoSelect" class="form-control" name="instalacion">
+                        <select id="complejoSelect" class="form-control" name="instalacion" value="<?php echo set_value('instalacion');?>">
                             <option></option>
                             <?php
                                 foreach($instalaciones as $row){
@@ -48,7 +48,7 @@
                 <label for="direccionSelect" >Dirección</label>
                     <div>
                          <!-- CARGAR DIRECTAMENTE DE TABLA DE DIRECCIONES DEPENDIENDO DE LA INSTALACION-->
-                        <select id="direccionSelect" class="form-control" name="direccion">
+                        <select id="direccionSelect" class="form-control" name="direccion" value="<?php echo set_value('direccion');?>">
                             <option></option>
                             <option value = 'Dirección General'>Dirección General</option>
                             <option value = 'Dirección Administrativa'>Dirección Administrativa</option>
@@ -61,15 +61,15 @@
                 </div>
                 <div class ="form-group">
                     <label>Fecha de compra</label>
-                    <input type="date" class="form-control" name="fecha_compra">
+                    <input type="date" class="form-control" name="fecha_compra" value="<?php echo set_value('fecha_compra');?>">
                 </div>
                 <div class ="form-group">
                     <label>Recibo</label>
-                    <input type="file" class="form-control" name="recibo_compra">
+                    <input type="file" class="form-control" name="recibo_compra" value="<?php echo set_value('recibo_compra');?>">
                 </div>
                 <div class ="form-group">
                     <label>Foto</label>
-                    <input type="file" class="form-control" name="foto">
+                    <input type="file" class="form-control" name="foto" value="<?php echo set_value('foto');?>">
                 </div>
                 <div class="row">
                     <div class="col padding">

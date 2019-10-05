@@ -75,8 +75,8 @@
                         $this->session->set_userdata($user_data);
                         switch($userInfo[0]->rol){
                             case 1: redirect('index.php/admin'); break;
-                            case 2: redirect('index.php/soporte'); break; // cambiar en el futuro
-                            case 3: redirect('index.php/empleado'); break; // cambiar en el futuro
+                            case 2: redirect('index.php/soporte'); break; 
+                            case 3: redirect('index.php/empleado'); break; 
                             default: redirect(base_url()); $this->session->set_flashdata('login_failed', 'Clave o usuario incorrectos');
                         }
                         // será necesario el mensaje de loggedin?

@@ -61,7 +61,7 @@
         }
 
         public function check_numInv_exists($numero){
-            $query = $this->db->get_where('articulo',array('num_inventario'=> $numero));
+            $query = $this->db->get_where('articulo', array('num_inventario'=> $numero));
             if(empty($query->row_array())){
                 return true;
             }else{
@@ -77,10 +77,32 @@
                 return false;
             }
         }
+
         public function getArticulos(){
             $q = $this->db->select('*')->from('articulo')->order_by('num_inventario', 'asc')->get();
             $r = $q->result_array();
             return $r;
+        }
+
+        public function getImagen($id){
+            $q = $this->db->get_where('imagen', array('articuloId_fk' => $id));
+            $r = $q->result_array();
+            return $r;
+        }
+
+        public function getRecibo($id){
+            $q = $this->db->get_where('recibo', array('articuloId_fk' => $id));
+            $r = $q->result_array();
+            return $r;
+        }
+
+        public function getArticuloInfo($id){
+            $q = $this->db->get_where('articulo', array('idArticulo' => $id));
+            if($q->num_rows()==1){
+                return $q->result()[0]; 
+            }else{
+                return false;
+            }
         }
 
         public function getInstalaciones(){

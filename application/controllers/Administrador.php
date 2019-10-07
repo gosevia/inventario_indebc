@@ -62,6 +62,16 @@
             $this->load->view('footer');
         }
 
+        public function detalles_articulo(){
+            $data['articulo'] = $this->user_model->getArticuloInfo($_POST['detalle']);
+            $data['imagen'] = $this->user_model->getImagen($_POST['detalle']);
+            $data['recibo'] = $this->user_model->getRecibo($_POST['detalle']); 
+            $this->load->view('header');
+            $this->load->view('admin/admin');
+            $this->load->view('user/detalle_articulo',$data);
+            $this->load->view('footer');
+        }
+
         public function registrar_prestamo(){
     
             if($this->form_validation->run() === FALSE){

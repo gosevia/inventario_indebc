@@ -25,6 +25,18 @@ h4{
     margin-right: auto;
     margin-left: auto;
 }
+.consultar-table-container{
+    text-align: left;
+}
+.imagen-inventario{
+    max-width: 95%;
+    max-height: 95%;
+}
+.detalles-table-container{
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
 .login-container{
     border: solid 2px lightgray;
     padding-top: 10px;

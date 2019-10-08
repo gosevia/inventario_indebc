@@ -23,12 +23,36 @@
                     echo "<td>".$row['marca']."</td>";
                     echo "<td>".$row['modelo']."</td>";
                     switch($row['direccion_idDireccion_fk']){
-                        case 1: echo "<td>Dirección General</td>"; break;
-                        case 2: echo "<td>Dirección Administrativa</td>"; break;
-                        case 3: echo "<td>DANC Y CF</td>"; break;
-                        case 4: echo "<td>Dirección Promoción e Imagen</td>"; break;
-                        case 5: echo "<td>Dirección de Desarrollo del Deporte</td>"; break;
-                        case 6: echo "<td>Dirección de Infraestructura Deportiva</td>"; break;
+                        case 1:
+                        case 7:
+                        case 13:
+                        case 19:
+                        case 25: echo "<td>Dirección General</td>"; break;
+                        case 2: 
+                        case 8:
+                        case 14:
+                        case 20:
+                        case 26: echo "<td>Dirección Administrativa</td>"; break;
+                        case 3: 
+                        case 9: 
+                        case 15:
+                        case 21:
+                        case 27: echo "<td>DANC Y CF</td>"; break;
+                        case 4:
+                        case 10:
+                        case 16:
+                        case 22:
+                        case 28: echo "<td>Dirección Promoción e Imagen</td>"; break;
+                        case 5:
+                        case 11:
+                        case 17:
+                        case 23:
+                        case 29: echo "<td>Dirección de Desarrollo del Deporte</td>"; break;
+                        case 6:
+                        case 12:
+                        case 18:
+                        case 24:
+                        case 30: echo "<td>Dirección de Infraestructura Deportiva</td>"; break;
                     }
                     switch($row['instalacion_idInstalacion_fk']){
                         case 1: echo "<td>CAR Tijuana</td>"; break;

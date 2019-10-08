@@ -21,6 +21,9 @@
         //REGISTRO DE ARTICULOS
         public function registrarArticulo(){
 
+            //Cargar base de datos de empleados
+            $empleadosDB = $this->load->database('eusined', TRUE);
+
             //Obtener el id de la categoria seleccionada
             $categoria = $this->input->post('categoria');
             
@@ -44,6 +47,17 @@
             
             $direccion_id = $result->row(0)->idDireccion;
 
+            //Obtener el id del encargado de la base de datos de empleados
+            $encargado = $this->input->post('encargado');
+            $this->db->where('nombre', $encargado);
+            $result = $this->db->get('usuario');
+            
+            $rfc = $result->row(0)->correo_rfc;
+            $empleadosDB->where('RFC',$rfc);
+            $result = $empleadosDB->get('empleado');
+
+            $encargado_id = $result->row(0)->idEmpleado;
+
             //datos a insertar
             $data = array(
                 'nombre'=>$this->input->post('nombre'),
@@ -52,7 +66,7 @@
                 'marca'=> $this->input->post('marca'),
                 'modelo'=> $this->input->post('modelo'),
                 'categoria_idCategoria_fk'=> $cat_id,
-                //'encargado_fk'=> $this->input->post('encargado'),
+                'encargado_fk'=> $encargado_id,
                 'fecha_compra'=> $this->input->post('fecha_compra'),
                 'direccion_idDireccion_fk'=> $direccion_id,
                 'instalacion_idInstalacion_fk'=> $instalacion_id,

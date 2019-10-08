@@ -46,18 +46,53 @@
 
             //datos a insertar
             $data = array(
+                'nombre'=>$this->input->post('nombre'),
                 'num_inventario'=> $this->input->post('inventario'),
                 'num_serie'=> $this->input->post('serie'),
                 'marca'=> $this->input->post('marca'),
                 'modelo'=> $this->input->post('modelo'),
                 'categoria_idCategoria_fk'=> $cat_id,
+                //'encargado_fk'=> $this->input->post('encargado'),
                 'fecha_compra'=> $this->input->post('fecha_compra'),
-                'instalacion_idInstalacion_fk'=> $instalacion_id,
                 'direccion_idDireccion_fk'=> $direccion_id,
+                'instalacion_idInstalacion_fk'=> $instalacion_id,
                 'status'=> 1
             );
 
             return $this->db->insert('articulo',$data);
+        }
+
+        //sube el recibo en base la ID del articulo
+        public function subirRecibo($recibo,$articulo_id){
+            
+            //Ubicar el articulo
+            $this->db->where('idArticulo', $articulo_id);
+            $result = $this->db->get('articulo');
+            $idArt = $result->row(0)->idArticulo;
+
+            $data = array(
+                'articuloId_fk'=>$idArt,
+                'file_name'=>$recibo,
+                'uploaded_on'=>date("Y-m-d H:i:s"),
+            );
+
+            return $this->db->insert('recibo',$data);
+        }
+
+        //sube la foto en base la ID del articulo
+        public function subirFoto($foto, $articulo_id){
+            //Ubicar el articulo
+            $this->db->where('idArticulo', $articulo_id);
+            $result = $this->db->get('articulo');
+            $idArt = $result->row(0)->idArticulo;
+
+            $data = array(
+                'articuloId_fk'=>$idArt,
+                'file_name'=>$foto,
+                'uploaded_on'=>date("Y-m-d H:i:s"),
+            );
+
+            return $this->db->insert('imagen',$data);
         }
 
         public function check_numInv_exists($numero){
@@ -113,6 +148,12 @@
 
         public function getCategorias(){
             $q = $this->db->select('*')->from('categoria')->order_by('nombre','asc')->get();
+            $r = $q->result_array();
+            return $r;
+        }
+
+        public function getAdministradores(){
+            $q = $this->db->get_where('usuario', array('rol' => 1));
             $r = $q->result_array();
             return $r;
         }

@@ -82,11 +82,11 @@
                 </div>
                 <div class ="form-group">
                     <label>Recibo</label>
-                    <input type="file" class="form-control" name="userfile" value="<?php echo set_value('recibo_compra');?>">
+                    <input type="file" class="form-control" name="recibos[]" multiple value="<?php echo set_value('recibos[]');?>">
                 </div>
                 <div class ="form-group">
                     <label>Foto(s)</label>
-                    <input type="file" class="form-control" name="files[]" multiple value="<?php echo set_value('foto');?>">
+                    <input type="file" class="form-control" name="files[]" multiple value="<?php echo set_value('files[]');?>">
                 </div>
                 <div class="row">
                     <div class="col padding">

@@ -63,11 +63,36 @@
                 $this->fotoUpload->initialize($config);
                 
                 //Subir Recibo
+                /*
                 if($this->reciboUpload->do_upload('userfile')){
                     $data = array('upload_data'=>$this->reciboUpload->data());
                     $filename = $_FILES['userfile']['name'];  
                     $this->user_model->subirRecibo($filename, $articulo_id);
                 }
+                */
+
+                $count = count($_FILES['recibos']['name']);
+
+                if($count>0){
+                    for($i=0;$i<$count;$i++){
+                        if(!empty($_FILES['recibos']['name'][$i])){
+                            $_FILES['file']['name'] = $_FILES['recibos']['name'][$i];
+                            $_FILES['file']['type'] = $_FILES['recibos']['type'][$i];
+                            $_FILES['file']['tmp_name'] = $_FILES['recibos']['tmp_name'][$i];
+                            $_FILES['file']['error'] = $_FILES['recibos']['error'][$i];
+                            $_FILES['file']['size'] = $_FILES['recibos']['size'][$i];
+    
+                            if($this->reciboUpload->do_upload('file')){
+                                $uploadData = $this->reciboUpload->data();
+                                $filename = $uploadData['file_name'];
+                                
+                                $this->user_model->subirRecibo($filename,$articulo_id);
+                            }
+                        }
+                    }
+                }
+
+
 
                 //Subir Fotos
                 $count = count($_FILES['files']['name']);

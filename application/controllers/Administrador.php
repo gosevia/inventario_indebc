@@ -70,7 +70,6 @@
                     $this->user_model->subirRecibo($filename, $articulo_id);
                 }
                 */
-
                 $count = count($_FILES['recibos']['name']);
 
                 if($count>0){
@@ -91,8 +90,6 @@
                         }
                     }
                 }
-
-
 
                 //Subir Fotos
                 $count = count($_FILES['files']['name']);
@@ -142,6 +139,8 @@
 
         public function detalles_articulo(){
             $data['articulo'] = $this->user_model->getArticuloInfo($_POST['detalle']);
+            $data['encargado'] = $this->user_model->getUserInfo($data['articulo']->encargado_fk);
+            $data['empleado'] = $this->user_model->getUserInfo($data['articulo']->empleado_idEmpleado_fk);
             $data['imagen'] = $this->user_model->getImagen($_POST['detalle']);
             $data['recibo'] = $this->user_model->getRecibo($_POST['detalle']); 
             $this->load->view('header');

@@ -36,11 +36,11 @@
         </tr>
         <tr>
         <th scope="row">Encargado</th>
-        <td></td>
+        <td><?php echo $encargado[0]->nombre; ?></td>
         </tr>
         <tr>
         <th scope="row">Prestado a</th>
-        <td></td>
+        <td><?php if($empleado[0] != null){ echo $empleado[0]->nombre; } else { echo "Nadie"; } ?></td>
         </tr>
         <tr>
         <th scope="row">Dirección</th>

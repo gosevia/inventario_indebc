@@ -1,5 +1,7 @@
 .DS_Store
-
+uploads/image
+uploads/receipt
+application/config/database
 application/cache/*
 !application/cache/index.html
 

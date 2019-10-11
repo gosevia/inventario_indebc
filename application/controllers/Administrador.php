@@ -173,13 +173,16 @@
             $this->load->view('footer');
         }
 
-        public function view_img($img, $tipo){
+        public function view_img(){
+            $img = $this->uri->segment(3);
+            $tipo = $this->uri->segment(4);
+            $data['tipo'] = $tipo;
             if($tipo == '0'){
-                $data['img'] = $this->user_model->getImagen($img);
+                $data['img'] = $this->user_model->getImagenInfo($img);
             }else{
-                $data['img'] = $this->user_model->getRecibo($img);
+                $data['img'] = $this->user_model->getReciboInfo($img);
             }
-            $this->load->view('fullSizeImg');
+            $this->load->view('user/fullSizeImg', $data);
         }
 
         public function registrar_prestamo(){

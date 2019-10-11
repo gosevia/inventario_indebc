@@ -136,6 +136,18 @@
             return $r;
         }
 
+        public function getImagenInfo($id){
+            $q = $this->db->get_where('imagen', array('id' => $id));
+            $r = $q->result_array();
+            return $r;
+        }
+
+        public function getReciboInfo($id){
+            $q = $this->db->get_where('recibo', array('id' => $id));
+            $r = $q->result_array();
+            return $r;
+        }
+
         public function getArticuloInfo($id){
             $q = $this->db->get_where('articulo', array('idArticulo' => $id));
             if($q->num_rows()==1){

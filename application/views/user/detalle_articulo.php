@@ -115,9 +115,9 @@
         <div class="image-container">
             <?php if(!empty($imagen)){ foreach($imagen as $file){ ?>
                 <div class="div-image">
-                        <a href="<?php echo base_url('index.php/admin/view_img/'.$file['id'].'/0'); ?>" target="_blank">
-                            <img class="imagen-inventario" src="<?php echo base_url('uploads/image/'.$file['file_name']); ?>" >
-                        </a> 
+                    <a href="<?php echo base_url('index.php/admin/view_img/'.$file['id'].'/0'); ?>" target="_blank">
+                        <img class="imagen-inventario" src="<?php echo base_url('uploads/image/'.$file['file_name']); ?>" alt="Imagen no disponible" />
+                    </a> 
                 </div>
             <?php } }else{ ?>
                 <div class="div-image">
@@ -129,7 +129,7 @@
             <?php if(!empty($recibo)){ foreach($recibo as $file){ ?>
                 <div class="div-recibo">
                     <a href="<?php echo base_url('index.php/admin/view_img/'.$file['id'].'/1'); ?>" target="_blank">
-                        <img class="imagen-inventario" src="<?php echo base_url('uploads/receipt/'.$file['file_name']); ?>" >
+                        <img class="imagen-inventario" src="<?php echo base_url('uploads/receipt/'.$file['file_name']); ?>" alt="Imagen no disponible" />
                     </a>    
                 </div>
             <?php } }else{ ?>

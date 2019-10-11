@@ -173,6 +173,15 @@
             $this->load->view('footer');
         }
 
+        public function view_img($img, $tipo){
+            if($tipo == '0'){
+                $data['img'] = $this->user_model->getImagen($img);
+            }else{
+                $data['img'] = $this->user_model->getRecibo($img);
+            }
+            $this->load->view('fullSizeImg');
+        }
+
         public function registrar_prestamo(){
     
             if($this->form_validation->run() === FALSE){

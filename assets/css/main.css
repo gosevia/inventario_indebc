@@ -79,6 +79,16 @@ h4{
     border-radius: 10px;
     display: inline-block
 }
+.container-full-image{
+    width: 90%;
+    text-align: center;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    border: solid 2px lightgray;
+    border-radius: 5%;
+}
 .col.padding{
     padding-bottom: 1rem;
 }

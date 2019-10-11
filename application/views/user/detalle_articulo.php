@@ -115,7 +115,9 @@
         <div class="image-container">
             <?php if(!empty($imagen)){ foreach($imagen as $file){ ?>
                 <div class="div-image">
-                        <img class="imagen-inventario" src="<?php echo base_url('uploads/image/'.$file['file_name']); ?>" >
+                        <a href="<?php echo base_url('index.php/view_img/'.$file['id'].'/0'); ?>" target="_blank">
+                            <img class="imagen-inventario" src="<?php echo base_url('uploads/image/'.$file['file_name']); ?>" >
+                        </a> 
                 </div>
             <?php } }else{ ?>
                 <div class="div-image">
@@ -126,7 +128,9 @@
         <div class="recibo-container">
             <?php if(!empty($recibo)){ foreach($recibo as $file){ ?>
                 <div class="div-recibo">
-                    <img class="imagen-inventario" src="<?php echo base_url('uploads/receipt/'.$file['file_name']); ?>" >
+                    <a href="<?php echo base_url('index.php/view_img/'.$file['id'].'/1'); ?>" target="_blank">
+                        <img class="imagen-inventario" src="<?php echo base_url('uploads/receipt/'.$file['file_name']); ?>" >
+                    </a>    
                 </div>
             <?php } }else{ ?>
                 <div class="div-recibo">

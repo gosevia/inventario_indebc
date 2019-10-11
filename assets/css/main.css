@@ -28,14 +28,38 @@ h4{
 .consultar-table-container{
     text-align: left;
 }
+.div-image{
+    flex: 1 1 0;
+}
+.div-recibo{
+    flex: 1 1 0;
+}
 .imagen-inventario{
     max-width: 95%;
-    max-height: 95%;
+    max-height: 300px;
+}
+.detalles-container{
+    display: flex;
+    flex-direction: row;
+    height: 650px;
+}
+.image-container{
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 0;
+}
+.recibo-container{
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 0;
+}
+.fotos-container{
+    display: flex;
+    flex-direction: column;
+    flex: 2 1 0;
 }
 .detalles-table-container{
-    width: 90%;
-    margin-right: auto;
-    margin-left: auto;
+    flex: 1 1 0;
 }
 .login-container{
     border: solid 2px lightgray;

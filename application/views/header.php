@@ -53,30 +53,30 @@
                 <img src="<?php echo 'http://www.indebc.gob.mx/main/img/logoOficial.png'; ?>" width="300" />
             </p>    
         </div>
-<div class="container">
+        <div class="container">
 
-<?php if($this->session->flashdata('login_failed')): ?>
-    <?php echo '<p class="alert alert-danger alert-dismissible fade show">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>'.$this->session->flashdata('login_failed').'</p>'; ?>
-<?php endif; ?>
+        <?php if($this->session->flashdata('login_failed')): ?>
+            <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>'.$this->session->flashdata('login_failed').'</p>'; ?>
+        <?php endif; ?>
 
-<?php if($this->session->flashdata('user_loggedin')): ?>
-    <?php echo '<p class="alert alert-success alert-dismissible fade show">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('user_loggedin').'</p>'; ?>
-<?php endif; ?>
+        <?php if($this->session->flashdata('user_loggedin')): ?>
+            <?php echo '<p class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('user_loggedin').'</p>'; ?>
+        <?php endif; ?>
 
-<?php if($this->session->flashdata('user_loggedout')): ?>
-    <?php echo '<p class="alert alert-success alert-dismissible fade show">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('user_loggedout').'</p>'; ?>
-<?php endif; ?>
+        <?php if($this->session->flashdata('user_loggedout')): ?>
+            <?php echo '<p class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('user_loggedout').'</p>'; ?>
+        <?php endif; ?>
 
-<?php if($this->session->flashdata('inactive_account')): ?>
-    <?php echo '<p class="alert alert-danger alert-dismissible fade show">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('inactive_account').'</p>'; ?>
-<?php endif; ?>
+        <?php if($this->session->flashdata('inactive_account')): ?>
+            <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('inactive_account').'</p>'; ?>
+        <?php endif; ?>
 
-<?php if($this->session->flashdata('articulo_registrado')): ?>
-    <?php echo '<p class="alert alert-success alert-dismissible fade show">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('articulo_registrado').'</p>'; ?>
-<?php endif; ?>
-</div>
+        <?php if($this->session->flashdata('articulo_registrado')): ?>
+            <?php echo '<p class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('articulo_registrado').'</p>'; ?>
+        <?php endif; ?>
+        </div>

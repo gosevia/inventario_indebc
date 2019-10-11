@@ -39,16 +39,14 @@
                 $this->load->view('user/registrar_articulo',$data);
                 $this->load->view('footer');
             }else{
-                
-                $this->user_model->registrarArticulo();
-
-                //obtener el articulo
-                $articulo_id = $this->db->insert_id();
+                //Arreglos de los nombres de los recibos
+                $filename_recibos=array();
+                $filename_fotos=array();
 
                 //Preparar configuracion para subir archivos
                 //Configuracion para recibo
                 $config=array();
-                $config['allowed_types'] = 'jpg|jpeg|png|gif';
+                $config['allowed_types'] = 'jpg|jpeg|png';
                 $config['max_size'] = '10000';
                 $config['upload_path'] = './uploads/receipt';
                 $this->load->library('upload',$config,'reciboUpload');
@@ -56,36 +54,39 @@
                 
                 //Configuracion para fotos
                 $config=array();
-                $config['allowed_types'] = 'jpg|jpeg|png|gif';
+                $config['allowed_types'] = 'jpg|jpeg|png';
                 $config['max_size'] = '10000';
                 $config['upload_path'] = './uploads/image';
                 $this->load->library('upload',$config,'fotoUpload');
                 $this->fotoUpload->initialize($config);
                 
-                //Subir Recibo
-                /*
-                if($this->reciboUpload->do_upload('userfile')){
-                    $data = array('upload_data'=>$this->reciboUpload->data());
-                    $filename = $_FILES['userfile']['name'];  
-                    $this->user_model->subirRecibo($filename, $articulo_id);
-                }
-                */
+                //Subir Recibos
+    
                 $count = count($_FILES['recibos']['name']);
 
                 if($count>0){
-                    for($i=0;$i<$count;$i++){
-                        if(!empty($_FILES['recibos']['name'][$i])){
-                            $_FILES['file']['name'] = $_FILES['recibos']['name'][$i];
-                            $_FILES['file']['type'] = $_FILES['recibos']['type'][$i];
-                            $_FILES['file']['tmp_name'] = $_FILES['recibos']['tmp_name'][$i];
-                            $_FILES['file']['error'] = $_FILES['recibos']['error'][$i];
-                            $_FILES['file']['size'] = $_FILES['recibos']['size'][$i];
-    
-                            if($this->reciboUpload->do_upload('file')){
-                                $uploadData = $this->reciboUpload->data();
-                                $filename = $uploadData['file_name'];
-                                
-                                $this->user_model->subirRecibo($filename,$articulo_id);
+                    if($count > 3 ){
+                        $this->session->set_flashdata('3warning_recibos','El número de imágenes para el recibo ha sobrepasado el máximo de 3');
+                        redirect('index.php/admin/registrar_articulo');
+                    }else{
+                        for($i=0;$i<$count;$i++){
+                            if(!empty($_FILES['recibos']['name'][$i])){
+                                $_FILES['file']['name'] = $_FILES['recibos']['name'][$i];
+                                $_FILES['file']['type'] = $_FILES['recibos']['type'][$i];
+                                $_FILES['file']['tmp_name'] = $_FILES['recibos']['tmp_name'][$i];
+                                $_FILES['file']['error'] = $_FILES['recibos']['error'][$i];
+                                $_FILES['file']['size'] = $_FILES['recibos']['size'][$i];
+        
+                                if($this->reciboUpload->do_upload('file')){
+                                    $uploadData = $this->reciboUpload->data();
+                                    $filename = $uploadData['file_name'];
+                                    $filename_recibos[$i]=$filename;
+
+                                }else{
+                                    $this->session->set_flashdata('error_recibo','Ha habido un error al subir alguna(s) de las imágenes de recibo.
+                                    Verifica que la imágen sea tipo jpg, jpeg o png');
+                                    redirect('index.php/admin/registrar_articulo');
+                                }
                             }
                         }
                     }
@@ -95,26 +96,49 @@
                 $count = count($_FILES['files']['name']);
 
                 if($count>0){
-                    for($i=0;$i<$count;$i++){
-                        if(!empty($_FILES['files']['name'][$i])){
-                            $_FILES['file']['name'] = $_FILES['files']['name'][$i];
-                            $_FILES['file']['type'] = $_FILES['files']['type'][$i];
-                            $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
-                            $_FILES['file']['error'] = $_FILES['files']['error'][$i];
-                            $_FILES['file']['size'] = $_FILES['files']['size'][$i];
-    
-                            if($this->fotoUpload->do_upload('file')){
-                                $uploadData = $this->fotoUpload->data();
-                                $filename = $uploadData['file_name'];
-                                
-                                $this->user_model->subirFoto($filename,$articulo_id);
+                    if($count > 3 ){
+                        $this->session->set_flashdata('3warning_fotos','El número de imágenes para las fotos ha sobrepasado el máximo de 3');
+                        redirect('index.php/admin/registrar_articulo');
+                    }else{
+                        for($i=0;$i<$count;$i++){
+                            if(!empty($_FILES['files']['name'][$i])){
+                                $_FILES['file']['name'] = $_FILES['files']['name'][$i];
+                                $_FILES['file']['type'] = $_FILES['files']['type'][$i];
+                                $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+                                $_FILES['file']['error'] = $_FILES['files']['error'][$i];
+                                $_FILES['file']['size'] = $_FILES['files']['size'][$i];
+        
+                                if($this->fotoUpload->do_upload('file')){
+                                    $uploadData = $this->fotoUpload->data();
+                                    $filename = $uploadData['file_name'];
+                                    $filename_fotos[$i]=$filename;
+                                }else{
+                                    $this->session->set_flashdata('error_fotos','Ha habido un error al subir alguna(s) de las imágenes de Foto.
+                                    Verifica que la imágen sea tipo jpg, jpeg o png');                                
+                                    redirect('index.php/admin/registrar_articulo');
+                                }
                             }
                         }
                     }
                 }
 
-                $this->session->set_flashdata('articulo_registrado','El artículo ha sido registrado');
-                redirect('index.php/admin/consultar_articulo');
+                if($this->user_model->registrarArticulo()){
+                    $articulo_id = $this->db->insert_id();
+                    //Guardar los recibos en las base de datos
+                    foreach($filename_recibos as $filename){
+                        $this->user_model->subirRecibo($filename,$articulo_id);
+                    }
+                    //Guardar las fotos en las base de datos
+                    foreach($filename_fotos as $filename){
+                        $this->user_model->subirFoto($filename,$articulo_id);
+                    }
+
+                    $this->session->set_flashdata('articulo_registrado','El artículo ha sido registrado');
+                    redirect('index.php/admin/consultar_articulo');
+                }else{
+                    $this->session->set_flashdata('error_registrar','Ha habido un error al registrar el artículo, inténtelo de nuevo');                                
+                    redirect('index.php/admin/registrar_articulo');
+                }
             }
         }
 

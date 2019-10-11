@@ -79,4 +79,29 @@
     <?php echo '<p class="alert alert-success alert-dismissible fade show">
     <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('articulo_registrado').'</p>'; ?>
 <?php endif; ?>
+
+<?php if($this->session->flashdata('error_registrar')): ?>
+    <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('error_registrar').'</p>'; ?>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('error_recibo')): ?>
+    <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('error_recibo').'</p>'; ?>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('error_fotos')): ?>
+    <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('error_fotos').'</p>'; ?>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('3warning_recibos')): ?>
+    <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('3warning_recibos').'</p>'; ?>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('3warning_fotos')): ?>
+    <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('3warning_fotos').'</p>'; ?>
+<?php endif; ?>
 </div>

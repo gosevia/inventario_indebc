@@ -19,7 +19,7 @@
                     <input type="text" class="form-control" name="serie" placeholder="Número de serie"value="<?php echo set_value('serie');?>">
                 </div>
                 <div class ="form-group">
-                    <label for="categoriaSelect" class="col-sm-2 control-label">Categoría</label>
+                    <label for="categoriaSelect" class="font-weight-bold">Categoría</label>
                     <div>
                         <select id="categoriaSelect" class="form-control" name="categoria" value="<?php echo set_value('categoria');?>">
                             <option></option>
@@ -33,7 +33,7 @@
                     </div>                
                 </div>
                 <div class ="form-group">
-                    <label for="complejoSelect" >Instalación</label>
+                    <label class="font-weight-bold" for="complejoSelect" >Instalación</label>
                     <div>
                     <!-- CARGAR DIRECTAMENTE DE TABLA DE INSTALACIONES-->
                         <select id="complejoSelect" class="form-control" name="instalacion" value="<?php echo set_value('instalacion');?>">
@@ -48,7 +48,7 @@
                     </div>           
                 </div>
                 <div class ="form-group">
-                <label for="direccionSelect" >Dirección</label>
+                <label class="font-weight-bold" for="direccionSelect" >Dirección</label>
                     <div>
                         <select id="direccionSelect" class="form-control" name="direccion" value="<?php echo set_value('direccion');?>">
                             <option></option>
@@ -62,7 +62,7 @@
                     </div>  
                 </div>
                 <div class ="form-group">
-                    <label for="encargadoSelect" >Encargado del artículo</label>
+                    <label class="font-weight-bold" for="encargadoSelect" >Encargado del artículo</label>
                     <div>
                     <!-- CARGAR DIRECTAMENTE DE TABLA DE INSTALACIONES-->
                         <select id="encargadoSelect" class="form-control" name="encargado" value="<?php echo set_value('encargado');?>">
@@ -77,16 +77,20 @@
                     </div>           
                 </div>
                 <div class ="form-group">
-                    <label>Fecha de compra</label>
+                    <label class="font-weight-bold">Fecha de compra</label>
                     <input type="date" class="form-control" name="fecha_compra" value="<?php echo set_value('fecha_compra');?>">
                 </div>
                 <div class ="form-group">
-                    <label>Recibo</label>
+                    <label class="font-weight-bold">Recibo</label>
                     <input type="file" class="form-control" name="recibos[]" multiple value="<?php echo set_value('recibos[]');?>">
+                    <br>
+                    <p style="background-color:#99ccff; border-left: 6px solid blue;">Se pueden registrar un máximo de 3 imágenes para el recibo. Las extensiones permitidas son: .jpg, .jpeg y .png</p>
                 </div>
                 <div class ="form-group">
-                    <label>Foto(s)</label>
+                    <label class="font-weight-bold">Foto(s)</label>
                     <input type="file" class="form-control" name="files[]" multiple value="<?php echo set_value('files[]');?>">
+                    <br>
+                    <p style="background-color:#99ccff; border-left: 6px solid blue;">Se pueden registrar un máximo de 3 imágenes para las fotos. Las extensiones permitidas son: .jpg, .jpeg y .png</p>
                 </div>
                 <div class="row">
                     <div class="col padding">

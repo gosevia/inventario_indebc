@@ -78,14 +78,9 @@
 
         //sube el recibo en base la ID del articulo
         public function subirRecibo($recibo,$articulo_id){
-            
-            //Ubicar el articulo
-            $this->db->where('idArticulo', $articulo_id);
-            $result = $this->db->get('articulo');
-            $idArt = $result->row(0)->idArticulo;
 
             $data = array(
-                'articuloId_fk'=>$idArt,
+                'articuloId_fk'=>$articulo_id,
                 'file_name'=>$recibo,
                 'uploaded_on'=>date("Y-m-d H:i:s"),
             );
@@ -95,13 +90,9 @@
 
         //sube la foto en base la ID del articulo
         public function subirFoto($foto, $articulo_id){
-            //Ubicar el articulo
-            $this->db->where('idArticulo', $articulo_id);
-            $result = $this->db->get('articulo');
-            $idArt = $result->row(0)->idArticulo;
 
             $data = array(
-                'articuloId_fk'=>$idArt,
+                'articuloId_fk'=>$articulo_id,
                 'file_name'=>$foto,
                 'uploaded_on'=>date("Y-m-d H:i:s"),
             );

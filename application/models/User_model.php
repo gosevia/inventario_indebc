@@ -76,6 +76,83 @@
             return $this->db->insert('articulo',$data);
         }
 
+        public function actualizarArticulo(){
+            $data = array();
+            if(trim($this->input->post('nombre'), "\x00..\x1F") != null && trim($this->input->post('nombre'), "\x00..\x1F") != ''){
+                $data['nombre'] = $this->input->post('nombre');
+            }
+            if(trim($this->input->post('inventario'), "\x00..\x1F") != null && trim($this->input->post('inventario'), "\x00..\x1F") != ''){
+                $data['num_inventario'] = $this->input->post('inventario');
+            }
+            if(trim($this->input->post('serie'), "\x00..\x1F") != null && trim($this->input->post('serie'), "\x00..\x1F") != ''){
+                $data['num_serie'] = $this->input->post('serie');
+            }
+            if(trim($this->input->post('marca'), "\x00..\x1F") != null && trim($this->input->post('marca'), "\x00..\x1F") != ''){
+                $data['marca'] = $this->input->post('marca');
+            }
+            if(trim($this->input->post('modelo'), "\x00..\x1F") != null && trim($this->input->post('modelo'), "\x00..\x1F") != ''){
+                $data['modelo'] = $this->input->post('modelo');
+            }
+            //Cargar base de datos de empleados
+            $empleadosDB = $this->load->database('eusined', TRUE);
+
+            //Obtener el id de la categoria seleccionada
+            if(trim($this->input->post('categoria'), "\x00..\x1F") != null && trim($this->input->post('categoria'), "\x00..\x1F") != ''){
+                $categoria = $this->input->post('categoria');
+                $this->db->where('nombre', $categoria);
+                $result = $this->db->get('categoria');
+                $cat_id = $result->row(0)->idCategoria;
+                $date['categoria_idCategoria_fk'] = $cat_id;
+            }
+            
+            //Obtener el id de la instalacion seleccionada
+            if(trim($this->input->post('instalacion'), "\x00..\x1F") != null && trim($this->input->post('instalacion'), "\x00..\x1F") != ''){
+                $instalacion = $this->input->post('instalacion');
+                $this->db->where('instalacion', $instalacion);
+                $result = $this->db->get('instalacion');
+                $instalacion_id = $result->row(0)->idInstalacion;
+                $data['instalacion_idInstalacion_fk'] = $instalacion_id;
+            }            
+            
+            //Obtener el id de la Direccion seleccionada
+            if(trim($this->input->post('direccion'), "\x00..\x1F") != null && trim($this->input->post('direccion'), "\x00..\x1F") != ''){    
+                $direccion = $this->input->post('direccion');
+                $this->db->where('instalacion_idInstalacion_fk', $instalacion_id);
+                $this->db->where('direccion', $direccion);
+                $result = $this->db->get('direccion');
+                $direccion_id = $result->row(0)->idDireccion;
+                $data['direccion_idDireccion_fk'] = $direccion_id;
+            }
+
+            //Obtener el id del encargado de la base de datos de empleados
+            if(trim($this->input->post('encargado'), "\x00..\x1F") != null && trim($this->input->post('encargado'), "\x00..\x1F") != ''){
+                $encargado = $this->input->post('encargado');
+                $this->db->where('nombre', $encargado);
+                $result = $this->db->get('usuario');
+                $rfc = $result->row(0)->correo_rfc;
+                $empleadosDB->where('RFC', $rfc);
+                $result = $empleadosDB->get('empleado');
+                $encargado_id = $result->row(0)->idEmpleado;
+                $data['encargado_fk'] = $encargado_id;
+            }
+            /*
+            $data = array(
+                'nombre' => $this->input->post('nombre'),
+                'num_inventario' => $this->input->post('inventario'),
+                'num_serie' => $this->input->post('serie'),
+                'marca' => $this->input->post('marca'),
+                'modelo' => $this->input->post('modelo'),
+                'categoria_idCategoria_fk' => $cat_id,
+                'encargado_fk' => $encargado_id,
+                'fecha_compra' => $this->input->post('fecha_compra'),
+                'direccion_idDireccion_fk' => $direccion_id,
+                'instalacion_idInstalacion_fk' => $instalacion_id,
+                'status' => 1
+            );*/    
+            $this->db->where('idArticulo', $this->input->post('detalle'));
+            return $this->db->update('articulo', $data);
+        }
+
         //sube el recibo en base la ID del articulo
         public function subirRecibo($recibo,$articulo_id){
 
@@ -98,6 +175,36 @@
             );
 
             return $this->db->insert('imagen',$data);
+        }
+
+        public function deleteRecibo($recibos){
+            foreach($recibos as $recibo){
+                $name = $this->user_model->getReciboInfo($recibo);
+                //ELIMINAR ARCHIVO DEL SERVIDOR Y LUEGO DE LA BASE DE DATOS
+                //EL PATH ABSOLUTO PUEDE SER DIFERENTE AL SUBIR EL PROYECTO O PARA UNA MAQUINA DIFERENTE
+                if(unlink($_SERVER['DOCUMENT_ROOT'].'/inventario_indebc/uploads/receipt/'.$name[0]['file_name'])){
+                    $this->db->where("id", $recibo);
+                    $this->db->delete("recibo");
+                }else{
+                    die("ERROR DELETING RECIBO");
+                }
+            }
+            return;
+        }
+
+        public function deleteImagen($imgs){
+            foreach($imgs as $img){
+                $name = $this->user_model->getImagenInfo($img);
+                //ELIMINAR ARCHIVO DEL SERVIDOR Y LUEGO DE LA BASE DE DATOS
+                //EL PATH ABSOLUTO PUEDE SER DIFERENTE AL SUBIR EL PROYECTO O PARA UNA MAQUINA DIFERENTE
+                if(unlink($_SERVER['DOCUMENT_ROOT'].'/inventario_indebc/uploads/image/'.$name[0]['file_name'])){
+                    $this->db->where("id", $img);
+                    $this->db->delete("imagen");
+                }else{
+                    die("ERROR DELETING IMG");
+                }
+            }
+            return;
         }
 
         public function check_numInv_exists($numero){
@@ -155,6 +262,18 @@
             }else{
                 return false;
             }
+        }
+
+        public function getImagenCount($id){
+            $q = $this->db->get_where('imagen', array('articuloId_fk' => $id));
+            $rows = $q->num_rows();
+            return $rows;
+        }
+
+        public function getReciboCount($id){
+            $q = $this->db->get_where('recibo', array('articuloId_fk' => $id));
+            $rows = $q->num_rows();
+            return $rows;
         }
 
         public function getInstalaciones(){

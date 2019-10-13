@@ -90,6 +90,9 @@ h4{
 .col.padding{
     padding-bottom: 1rem;
 }
+.thumbnail-container{
+    padding-right: 1rem;
+}
 #estado1{
     color: white;
     font-weight: bold;

@@ -103,13 +103,16 @@
             ?>
             </tr>
         </table>
-        <div class="row">
-            <div class="col padding">
-                <button type="submit" name="editar" class="btn btn-outline-primary">
-                    <i class="fa fa-pencil-square-o"></i> Editar
-                </button>
+        <?php echo form_open_multipart('index.php/admin/editar_articulo'); ?>
+            <div class="row">
+                <div class="col padding">
+                    <input type='hidden' id='detalle' name='detalle' value='<?php echo $articulo->idArticulo; ?>' />
+                    <button type="submit" name="editar" class="btn btn-outline-primary">
+                        <i class="fa fa-pencil-square-o"></i> Editar
+                    </button>
+                </div>
             </div>
-        </div>
+        <?php echo form_close(); ?>
     </div>
     <div class="fotos-container">
         <div class="image-container">

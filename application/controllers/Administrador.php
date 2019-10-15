@@ -40,6 +40,7 @@
                 //Arreglos de los nombres de los recibos
                 $filename_recibos=array();
                 $filename_fotos=array();
+                $filename_resguardo = 'value';
 
                 //Preparar configuracion para subir archivos
                 //Configuracion para recibo
@@ -57,6 +58,14 @@
                 $config['upload_path'] = './uploads/image';
                 $this->load->library('upload',$config,'fotoUpload');
                 $this->fotoUpload->initialize($config);
+
+                //Configuracion para resguardo
+                $config=array();
+                $config['allowed_types'] = 'jpg|jpeg|png|pdf';
+                $config['max_size'] = '10000';
+                $config['upload_path'] = './uploads/resguardo';
+                $this->load->library('upload',$config,'resguardoUpload');
+                $this->resguardoUpload->initialize($config);
                 
                 //Subir Recibos
     
@@ -120,16 +129,34 @@
                     }
                 }
 
+                //Subir resguardo
+                if(!empty($_FILES['userfile']['name'])){
+                    if($this->resguardoUpload->do_upload('userfile')){
+                        $uploadData = $this->resguardoUpload->data();
+                        $filename = $uploadData['file_name'];
+                        $filename_resguardo = $filename;
+                    }else{
+                        $this->session->set_flashdata('error_resguardo','Ha habido un error al subir el archivo o imágen del resguardo.
+                                    Verifica que sea tipo jpg, jpeg, png o pdf');                                
+                                    redirect('index.php/admin/registrar_articulo');
+                    }
+                }
+
                 if($this->user_model->registrarArticulo()){
                     $articulo_id = $this->db->insert_id();
+
                     //Guardar los recibos en las base de datos
                     foreach($filename_recibos as $filename){
                         $this->user_model->subirRecibo($filename,$articulo_id);
                     }
+
                     //Guardar las fotos en las base de datos
                     foreach($filename_fotos as $filename){
                         $this->user_model->subirFoto($filename,$articulo_id);
                     }
+
+                    //Guardar archivo o imagen de resguardo
+                    $this->user_model->subirResguardo($filename_resguardo, $articulo_id);
 
                     $this->session->set_flashdata('articulo_registrado','El artículo ha sido registrado');
                     redirect('index.php/admin/consultar_articulo');

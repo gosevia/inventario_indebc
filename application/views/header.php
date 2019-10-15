@@ -105,6 +105,11 @@
             <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('error_fotos').'</p>'; ?>
         <?php endif; ?>
 
+        <?php if($this->session->flashdata('error_resguardo')): ?>
+            <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('error_resguardo').'</p>'; ?>
+        <?php endif; ?>
+
         <?php if($this->session->flashdata('3warning_recibos')): ?>
             <?php echo '<p class="alert alert-danger alert-dismissible fade show">
             <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('3warning_recibos').'</p>'; ?>

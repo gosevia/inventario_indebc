@@ -386,11 +386,11 @@
         }
 
         public function registrar_prestamo(){
-    
+            $data['articulos'] = $this->user_model->getArticulos();
             if($this->form_validation->run() === FALSE){
                 $this->load->view('header');
                 $this->load->view('admin/admin');
-                $this->load->view('user/registrar_prestamo');
+                $this->load->view('user/registrar_prestamo',$data);
                 $this->load->view('footer');
             }else{
                 

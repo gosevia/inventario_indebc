@@ -188,6 +188,17 @@
             return $this->db->insert('imagen',$data);
         }
 
+        public function subirResguardo($resguardo, $articulo_id){
+
+            $data = array(
+                'articuloId_fk'=>$articulo_id,
+                'file_name'=>$resguardo,
+                'uploaded_on'=>date("Y-m-d H:i:s"),
+            );
+
+            return $this->db->insert('resguardo',$data);
+        }
+
         public function deleteRecibo($recibos){
             foreach($recibos as $recibo){
                 $name = $this->user_model->getReciboInfo($recibo);

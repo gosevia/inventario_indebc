@@ -92,6 +92,12 @@
                     <br>
                     <p style="background-color:#99ccff; border-left: 6px solid blue;">Se pueden registrar un máximo de 3 imágenes para las fotos. Las extensiones permitidas son: .jpg, .jpeg y .png</p>
                 </div>
+                <div class ="form-group">
+                    <label class="font-weight-bold">Documento de resguardo</label>
+                    <input type="file" class="form-control" name="userfile" value="<?php echo set_value('userfile');?>">
+                    <br>
+                    <p style="background-color:#99ccff; border-left: 6px solid blue;">Se puede registrar sólo una imágen ó archivo. Las extensiones permitidas son: .jpg, .jpeg, .png y .pdf</p>
+                </div>
                 <div class="row">
                     <div class="col padding">
                         <button type="submit" name="iniciar" class="btn btn-outline-dark">

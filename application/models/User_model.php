@@ -115,9 +115,20 @@
             }            
             
             //Obtener el id de la Direccion seleccionada
-            if(trim($this->input->post('direccion'), "\x00..\x1F") != null && trim($this->input->post('direccion'), "\x00..\x1F") != ''){    
+            if(isset($data['instalacion_idInstalacion_fk']) && (trim($this->input->post('direccion'), "\x00..\x1F") == null || trim($this->input->post('direccion'), "\x00..\x1F") == '')){
+                $art = $this->user_model->getArticuloInfo($this->input->post('detalle'));   //Get articulo
+                $this->db->where('idDireccion', $art->direccion_idDireccion_fk);    //Get direccion id from articulo
+                $dir = $this->db->get('direccion');
+                $dirName = $dir->row(0)->direccion; //Get direccion name
+                $this->db->where('instalacion_idInstalacion_fk', $data['instalacion_idInstalacion_fk']);
+                $this->db->where('direccion', $dirName);
+                $result = $this->db->get('direccion');  //Get new direccion with same name as the old one, but with new instalacion id
+                $direccion_id = $result->row(0)->idDireccion;
+                $data['direccion_idDireccion_fk'] = $direccion_id;
+            }else if(trim($this->input->post('direccion'), "\x00..\x1F") != null && trim($this->input->post('direccion'), "\x00..\x1F") != ''){    
                 $direccion = $this->input->post('direccion');
-                $this->db->where('instalacion_idInstalacion_fk', $instalacion_id);
+                $inst = $this->user_model->getArticuloInfo($this->input->post('detalle'));
+                $this->db->where('instalacion_idInstalacion_fk', $inst->instalacion_idInstalacion_fk);
                 $this->db->where('direccion', $direccion);
                 $result = $this->db->get('direccion');
                 $direccion_id = $result->row(0)->idDireccion;

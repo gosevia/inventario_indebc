@@ -70,6 +70,7 @@
                 'fecha_compra'=> $this->input->post('fecha_compra'),
                 'direccion_idDireccion_fk'=> $direccion_id,
                 'instalacion_idInstalacion_fk'=> $instalacion_id,
+                'edificio'=> $this->input->post('edificio'),
                 'status'=> 1
             );
 

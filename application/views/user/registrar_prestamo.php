@@ -1,36 +1,70 @@
         <div class="register-container"style="margin:1rem;">
         <h2>Registrar préstamo</h2>
             <?php echo validation_errors(); ?>
-            <?php echo form_open('index.php/admin/registrar_prestamo'); ?>
+            <?php $submit = array('onsubmit' => "document.getElementById('articulos').disabled = false;"); ?>
+            <?php echo form_open('index.php/admin/registrar_prestamo', $submit); ?>
                 <div class ="form-group">
-                    <input type="number" class="form-control" name="prestamo" placeholder="Número de prestamo"value="<?php echo set_value('prestamo');?>">
+                    <input type="number" class="form-control" name="prestamo" placeholder="Número de préstamo"value="<?php echo set_value('prestamo');?>">
                 </div>
                 <div class ="form-group">
-                    <label>Fecha inicial</label>
+                    <label class="font-weight-bold">Fecha inicial</label>
                     <input type="date" class="form-control" name="fecha_inicial" value="<?php echo set_value('fecha_inicial');?>">
                 </div>
                 <div class ="form-group">
-                    <label>Fecha final</label>
+                    <label class="font-weight-bold">Fecha final</label>
                     <input type="date" class="form-control" name="fecha_final" value="<?php echo set_value('fecha_final');?>">
                 </div>
 
                 <div class ="form-group">
-                    <label>Encargado</label>
-                    <input type="text" class="form-control" name="encargado" value="<?php echo set_value('encargado');?>">
+                    <label class="font-weight-bold" for="encargadoSelect" >Encargado</label>
+                    <div>
+                        <select id="encargadoSelect" class="form-control" name="encargado" value="<?php echo set_value('encargado');?>">
+                            <option></option>
+                            <?php
+                                foreach($administradores as $row){
+                                    $encargado_name = $row['nombre'];
+                                    echo"<option value='$encargado_name'>$encargado_name</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>           
                 </div>
                 <div class ="form-group">
-                    <label>Prestamista</label>
-                    <input type="text" class="form-control" name="prestamista" value="<?php echo set_value('prestamista');?>">
+                    <label class="font-weight-bold" for="prestamistaSelect" >Prestamista</label>
+                    <div>
+                        <select id="prestamistaSelect" class="form-control" name="prestamista" value="<?php echo set_value('prestamista');?>">
+                            <option></option>
+                            <?php
+                                foreach($practicantes as $row){
+                                    $prestamista_name = $row['nombre'];
+                                    echo"<option value='$prestamista_name'>$prestamista_name</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>           
                 </div>
                 <div class ="form-group">
-                    <label>Empleado</label>
-                    <input type="text" class="form-control" name="empleado" value="<?php echo set_value('empleado');?>">
+                    <label class="font-weight-bold">Empleado</label>
+                    <input type="text" class="form-control" id="empleado" name="empleado" value="<?php echo set_value('empleado');?>">
+                </div>
+                <div class ="form-group ui-widget">
+                    <label class="font-weight-bold">Artículos agregados al préstamo:</label>
+                    <select name="articulosSelected" class="form-control"  value="<?php echo set_value('empleado');?>" id="articulos" multiple disabled="true">
+                        
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col padding">
+                        <button type="submit" name="iniciar" class="btn btn-outline-dark">
+                            <i class="fa fa-pencil-square-o"></i> Registrar Préstamo
+                        </button>
+                    </div>
                 </div>
             <?php echo form_close(); ?>
         </div>
 
-        <div class="consultar-table-container">
-                    <table id="registrarArticulo" class="table table-striped table-bordered">
+        <div class="consultar-table-container" style="margin:5rem;">
+                    <table id="seleccionarArticulo" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                             <th></th>

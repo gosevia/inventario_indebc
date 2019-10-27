@@ -315,4 +315,16 @@
             $r = $q->result_array();
             return $r;
         }
+
+        public function getPracticantes(){
+            $q = $this->db->get_where('usuario', array('rol' => 2, 'status' => 1));
+            $r = $q->result_array();
+            return $r;
+        }
+
+        public function getEmpleados(){
+            $q = $this->db->get_where('usuario', array('rol' => 3, 'status' => 1));
+            $r = $q->result_array();
+            return $r;
+        }
     }

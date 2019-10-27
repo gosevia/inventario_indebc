@@ -387,8 +387,11 @@
 
         public function registrar_prestamo(){
             $data['articulos'] = $this->user_model->getArticulos();
+            $data['administradores'] = $this->user_model->getAdministradores();
+            $data['practicantes'] = $this->user_model->getPracticantes();
+            $data['empleados'] = $this->user_model->getEmpleados();
             if($this->form_validation->run() === FALSE){
-                $this->load->view('header');
+                $this->load->view('header',$data);
                 $this->load->view('admin/admin');
                 $this->load->view('user/registrar_prestamo',$data);
                 $this->load->view('footer');

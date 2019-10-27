@@ -16,7 +16,13 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.6/datatables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
+
 <script type="text/javascript">
+
+    var $ = jQuery.noConflict();
+
     $(document).ready( function () {
         $('#solicitarTable').DataTable( {
             "language": lang_spanish
@@ -49,19 +55,38 @@
     }
 
     $(document).ready( function () {
-        $('#registrarArticulo').DataTable( {
+        var listaArticulos = $('#articulos');
+        var table = $('#seleccionarArticulo').DataTable( {
             "language": lang_spanish,
             columnDefs: [{
             targets: 0,
             className: 'select-checkbox',
             orderable: false
-         }
-        ],
-      select: {
-         style: 'os',
-         selector: 'td:first-child'
-      },
-      order: [[1, 'asc']]
+            }],
+            select: {
+                style: 'os',
+                selector: 'td:first-child'
+            },
+            order: [[1, 'asc']],
+            dom:'Bfrtip',
+            select: true,
+            buttons:[
+                {
+                    text: 'Agregar artículos al préstamo',
+                    action: function (){
+                        var count = table.rows('.selected').count();
+                        var seleccionados = table.rows('.selected').data().toArray();
+                        console.log(seleccionados);
+                        
+                        //Agregar articulos a la selecccion multiple del prestamo. 
+                        listaArticulos.empty();
+                        for (i = 0; i < count; i++) {
+                            listaArticulos.append('<option value="'+seleccionados[i][1]+'"selected = "true">'+seleccionados[i][3]+' '+seleccionados[i][4]+'</option>');
+                        }
+
+                    }
+                }
+            ]
         });        
     });
     //<!-- para lenguaje español de la tabla -->
@@ -89,6 +114,28 @@
             "sSortDescending": ": Activar para ordenar la columna de manera descendente"
         }
     }
+</script>
+
+<!-- AUTOCOMPLETE INPUT-->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript">
+    var x = jQuery.noConflict();
+
+    var emp= JSON.parse('<?php echo json_encode($empleados); ?>');
+    var empleados = [];
+
+    for (i = 0; i < emp.length; i++) {
+        empleados[i] = emp[i].nombre;
+    }
+    
+    x( function(){
+        x("#empleado").autocomplete({
+            source: empleados
+        });
+    });
 </script>
 </head>
 <body>

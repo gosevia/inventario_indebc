@@ -39,6 +39,10 @@
                                     $prestamista_name = $row['nombre'];
                                     echo"<option value='$prestamista_name'>$prestamista_name</option>";
                                 }
+                                foreach($administradores as $row){
+                                    $prestamista_name = $row['nombre'];
+                                    echo"<option value='$prestamista_name'>$prestamista_name</option>";
+                                }
                             ?>
                         </select>
                     </div>           
@@ -49,7 +53,7 @@
                 </div>
                 <div class ="form-group ui-widget">
                     <label class="font-weight-bold">Artículos agregados al préstamo:</label>
-                    <select name="articulosSelected" class="form-control"  value="<?php echo set_value('empleado');?>" id="articulos" multiple disabled="true">
+                    <select name="articulosSelected[]" class="form-control" id="articulos" multiple disabled="true">
                         
                     </select>
                 </div>
@@ -63,7 +67,11 @@
             <?php echo form_close(); ?>
         </div>
 
-        <div class="consultar-table-container" style="margin:5rem;">
+        <div class="consultar-table-container" style="margin-bottom:5rem;">
+            <p style="background-color:#99ccff; border-left: 6px solid blue;" class="font-weight-bold">
+                Utiliza la siguiente tabla para agregar los artículos deseados. Una vez seleccionados, presiona "Agregar articulos al prestamo"
+            </p>
+
                     <table id="seleccionarArticulo" class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -129,7 +137,7 @@
                             switch($row['status']){
                                 case 0: echo "<td id='estado1'>No existe</td>"; break;
                                 case 1: echo "<td id='estado2'>Activo</td>"; break;
-                                case 2: echo "<td id='estado3'>Prestado</tc>"; break; 
+                                case 2: echo "<td id='estado3' class='prestado'>Prestado</td>"; break; 
                             }
                             echo '<td>';
                             echo form_open('index.php/admin/detalles_articulo');

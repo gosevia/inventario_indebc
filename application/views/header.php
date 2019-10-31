@@ -64,12 +64,19 @@
             orderable: false
             }],
             select: {
-                style: 'os',
-                selector: 'td:first-child'
+                style: 'multi',
+                //selector: 'td:first-child'
+                selector: 'tr:not(.no-select)'
+            },
+            //Validacion para no seleccionar los articulos ya prestados
+            rowCallback: function(row, data, index){
+                if(data[7] == 'Prestado'){
+                    $('td:eq(0)', row).html('');
+                    $(row).addClass('no-select');
+                }
             },
             order: [[1, 'asc']],
             dom:'Bfrtip',
-            select: true,
             buttons:[
                 {
                     text: 'Agregar artículos al préstamo',
@@ -81,13 +88,23 @@
                         //Agregar articulos a la selecccion multiple del prestamo. 
                         listaArticulos.empty();
                         for (i = 0; i < count; i++) {
-                            listaArticulos.append('<option value="'+seleccionados[i][1]+'"selected = "true">'+seleccionados[i][3]+' '+seleccionados[i][4]+'</option>');
+                            listaArticulos.append('<option value="'+seleccionados[i][1]+'"selected = "true">'+seleccionados[i][1]+' '+seleccionados[i][3]+' '+seleccionados[i][4]+'</option>');
                         }
 
                     }
                 }
             ]
-        });        
+        });/*
+        table.on('select', function(e, dt, type, indexes) {
+            if (type === 'row') {
+                var rows = table.rows(indexes).nodes().to$();
+                $.each(rows, function() {
+                if ($(this).hasClass('prestado')) table.row($(this)).addClass('no-select');
+                })
+            } 
+        });      */
+
+
     });
     //<!-- para lenguaje español de la tabla -->
     var lang_spanish = {

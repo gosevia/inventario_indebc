@@ -18,7 +18,6 @@
             }
         }
         public function registrar_articulo(){
-           // $this->form_validation->set_rules('inventario', 'Número de Inventario','callback_check_numInv_exists');
             $this->form_validation->set_rules('nombre','Nombre','required');
             $this->form_validation->set_rules('marca','Marca','required');
             $this->form_validation->set_rules('modelo','Modelo','required');
@@ -390,13 +389,28 @@
             $data['administradores'] = $this->user_model->getAdministradores();
             $data['practicantes'] = $this->user_model->getPracticantes();
             $data['empleados'] = $this->user_model->getEmpleados();
+
+            $this->form_validation->set_rules('prestamo','Número de préstamo','required');
+            $this->form_validation->set_rules('fecha_inicial','Fecha inicial','required');
+            $this->form_validation->set_rules('fecha_final','Fecha final','required');
+            $this->form_validation->set_rules('encargado','Encargado','required');
+            $this->form_validation->set_rules('prestamista','Prestamista','required');
+            $this->form_validation->set_rules('empleado','Empleado','required');
+            $this->form_validation->set_rules('articulosSelected[]','Artículos','required');
+
             if($this->form_validation->run() === FALSE){
                 $this->load->view('header',$data);
                 $this->load->view('admin/admin');
                 $this->load->view('user/registrar_prestamo',$data);
                 $this->load->view('footer');
             }else{
-                
+                if($this->user_model->registrarPrestamo()){
+                    $this->user_model->insertPrestamoArticulo();
+                    $this->session->set_flashdata('prestamo_registrado','El préstamo ha sido registrado');
+                    redirect('index.php/admin/registrar_prestamo');
+                }else{
+
+                }
             }
         }
     }

@@ -77,6 +77,77 @@
             return $this->db->insert('articulo',$data);
         }
 
+        //REGISTRO DE PRESTAMOS
+
+        public function registrarPrestamo(){
+
+            //cargar base de datos de empleados
+            $empleadosDB = $this->load->database('eusined', TRUE);
+
+            //id del empelado
+            $nombreEmpleado = $this->input->post('empleado');
+            $this->db->where('nombre',$nombreEmpleado);
+            $result = $this->db->get('usuario');
+            
+            $rfc = $result->row(0)->correo_rfc;
+            $empleadosDB->where('RFC',$rfc);
+            $result = $empleadosDB->get('empleado');
+
+            $empleadoId = $result->row(0)->idEmpleado;
+
+            //id del encargado
+            $nombreEncargado = $this->input->post('encargado');
+            $this->db->where('nombre',$nombreEncargado);
+            $result = $this->db->get('usuario');
+            
+            $rfc = $result->row(0)->correo_rfc;
+            $empleadosDB->where('RFC',$rfc);
+            $result = $empleadosDB->get('empleado');
+
+            $encargadoId = $result->row(0)->idEmpleado;
+
+            //id del prestamista
+            $nombrePrestamista = $this->input->post('prestamista');
+            $this->db->where('nombre',$nombrePrestamista);
+            $result = $this->db->get('usuario');
+
+            $prestamistaId = $result->row(0)->idUsuario;
+
+            //datos a insertar
+            $data = array(
+                'numPrestamo'=>$this->input->post('prestamo'),
+                'fecha_inicio'=> $this->input->post('fecha_inicial'),
+                'fecha_fin'=> $this->input->post('fecha_final'),
+                'encargado_fk'=> $encargadoId,
+                'prestamista_fk'=> $prestamistaId,
+                'empleado_fk'=> $empleadoId
+            );
+
+            return $this->db->insert('prestamo',$data);
+        }
+
+        public function insertPrestamoArticulo(){
+
+            $prestamoId = $this->db->insert_id();
+            // IDENTIFICAR LOS ARTICULOS PARA ACTUALIZAR EL CAMPO "IDPRESTAMO"
+
+            $articulos = $this->input->post('articulosSelected');
+
+            $count = count($articulos);
+            //EFECTUAR SPLIT A LA CADENA RESIVIDA DEL ARTICULO PARA UTILIZAR EL ID
+            $data = array();
+            
+            $data['idPrestamo'] = $prestamoId;
+            $data['status'] = 2;
+            for($i = 0; $i < $count; $i++){
+
+                $id = $articulos[$i];
+                $this->db->where('idArticulo', $id);
+                $this->db->update('articulo', $data);
+            }
+
+        }
+
         public function actualizarArticulo(){
             $data = array();
             if(trim($this->input->post('nombre'), "\x00..\x1F") != null && trim($this->input->post('nombre'), "\x00..\x1F") != ''){

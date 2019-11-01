@@ -9,7 +9,7 @@
     <div class="dropdown-menu">
       <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/admin/consultar_articulo">Consultar</a>
       <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/admin/registrar_articulo">Registrar</a>
-      <a class="dropdown-item" href="#">Bajas</a>
+      <!--<a class="dropdown-item" href="#">Bajas</a>-->
     </div>
     </li>
 

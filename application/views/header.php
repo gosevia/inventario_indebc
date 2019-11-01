@@ -53,107 +53,8 @@
             "sSortDescending": ": Activar para ordenar la columna de manera descendente"
         }
     }
-
-    $(document).ready( function () {
-        var listaArticulos = $('#articulos');
-        var table = $('#seleccionarArticulo').DataTable( {
-            "language": lang_spanish,
-            columnDefs: [{
-            targets: 0,
-            className: 'select-checkbox',
-            orderable: false
-            }],
-            select: {
-                style: 'multi',
-                //selector: 'td:first-child'
-                selector: 'tr:not(.no-select)'
-            },
-            //Validacion para no seleccionar los articulos ya prestados
-            rowCallback: function(row, data, index){
-                if(data[7] == 'Prestado'){
-                    $('td:eq(0)', row).html('');
-                    $(row).addClass('no-select');
-                }
-            },
-            order: [[1, 'asc']],
-            dom:'Bfrtip',
-            buttons:[
-                {
-                    text: 'Agregar artículos al préstamo',
-                    action: function (){
-                        var count = table.rows('.selected').count();
-                        var seleccionados = table.rows('.selected').data().toArray();
-                        console.log(seleccionados);
-                        
-                        //Agregar articulos a la selecccion multiple del prestamo. 
-                        listaArticulos.empty();
-                        for (i = 0; i < count; i++) {
-                            listaArticulos.append('<option value="'+seleccionados[i][1]+'"selected = "true">'+seleccionados[i][1]+' '+seleccionados[i][3]+' '+seleccionados[i][4]+'</option>');
-                        }
-
-                    }
-                }
-            ]
-        });/*
-        table.on('select', function(e, dt, type, indexes) {
-            if (type === 'row') {
-                var rows = table.rows(indexes).nodes().to$();
-                $.each(rows, function() {
-                if ($(this).hasClass('prestado')) table.row($(this)).addClass('no-select');
-                })
-            } 
-        });      */
-
-
-    });
-    //<!-- para lenguaje español de la tabla -->
-    var lang_spanish = {
-        "sProcessing":     "Procesando...",
-        "sLengthMenu":     "Mostrar _MENU_ registros",
-        "sZeroRecords":    "No se encontraron resultados",
-        "sEmptyTable":     "Ningún dato disponible en esta tabla",
-        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-        "sInfoPostFix":    "",
-        "sSearch":         "Buscar:",
-        "sUrl":            "",
-        "sInfoThousands":  ",",
-        "sLoadingRecords": "Cargando...",
-        "oPaginate": {
-            "sFirst":    "Primero",
-            "sLast":     "Último",
-            "sNext":     "Siguiente",
-            "sPrevious": "Anterior"
-        },
-        "oAria": {
-            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-        }
-    }
 </script>
 
-<!-- AUTOCOMPLETE INPUT-->
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<script type="text/javascript">
-    var x = jQuery.noConflict();
-
-    var emp= JSON.parse('<?php echo json_encode($empleados); ?>');
-    var empleados = [];
-
-    for (i = 0; i < emp.length; i++) {
-        empleados[i] = emp[i].nombre;
-    }
-    
-    x( function(){
-        x("#empleado").autocomplete({
-            source: empleados
-        });
-    });
-</script>
 </head>
 <body>
     <div class="container-fluid">
@@ -232,5 +133,10 @@
         <?php if($this->session->flashdata('0warning_img')): ?>
             <?php echo '<p class="alert alert-danger alert-dismissible fade show">
             <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('0warning_img').'</p>'; ?>
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata('prestamo_registrado')): ?>
+            <?php echo '<p class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('prestamo_registrado').'</p>'; ?>
         <?php endif; ?>
 </div>

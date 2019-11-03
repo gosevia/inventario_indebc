@@ -79,7 +79,7 @@
 
         //REGISTRO DE PRESTAMOS
 
-        public function registrarPrestamo(){
+        public function registrarPrestamo($tipo){
 
             //cargar base de datos de empleados
             $empleadosDB = $this->load->database('eusined', TRUE);
@@ -120,7 +120,8 @@
                 'fecha_fin'=> $this->input->post('fecha_final'),
                 'encargado_fk'=> $encargadoId,
                 'prestamista_fk'=> $prestamistaId,
-                'empleado_fk'=> $empleadoId
+                'empleado_fk'=> $empleadoId,
+                'status'=>$tipo
             );
 
             return $this->db->insert('prestamo',$data);

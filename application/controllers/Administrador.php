@@ -181,8 +181,42 @@
             $data['articulos'] = $this->user_model->getArticulos();
             $this->load->view('header');
             $this->load->view('admin/admin');
-            $this->load->view('user/consultar_articulo',$data);
+            $this->load->view('user/consultar_articulo', $data);
             $this->load->view('footer');
+        }
+
+        public function consultar_usuario(){
+            $data['usuarios'] = $this->user_model->getAllUsers();
+            $this->load->view('header');
+            $this->load->view('admin/admin');
+            $this->load->view('user/consultar_usuario', $data);
+            $this->load->view('footer');
+        }
+
+        public function detalles_usuario(){
+            if(isset($_POST['idUsuario'])){
+                $usuarioId = $_POST['idUsuario'];
+            }else{
+                $usuarioId = $this->uri->segment(3);
+            }
+            $data['prestamos'] = $this->user_model->getPrestamosFromId($usuarioId);
+            $data['usuario'] = $this->user_model->getUserInfo($usuarioId);
+            $this->load->view('header');
+            $this->load->view('admin/admin');
+            $this->load->view('user/detalles_usuario', $data);
+            $this->load->view('footer');
+        }
+        
+        public function actualizar_usuario(){
+            if(isset($_POST['idUsuario'])){
+                $usuarioId = $_POST['idUsuario'];
+            }else{
+                $usuarioId = $this->uri->segment(3);
+            }
+            $rol = $_POST['rol'];
+            $this->user_model->userRole($usuarioId, $rol);
+            $this->session->set_flashdata('cambios_usuario','Se han guardado los cambios de usuario');
+            redirect('index.php/admin/detalles_usuario/'.$usuarioId);
         }
 
         public function detalles_articulo(){
@@ -370,6 +404,29 @@
                     redirect('index.php/admin/editar_articulo/'.$articuloId);
                 }
             }
+        }
+
+        public function eliminar_articulo(){
+            if(isset($_POST['artID'])){
+                $articuloId = $_POST['artID'];
+            }else{
+                $articuloId = $this->uri->segment(3);
+            }
+            $data['articulo'] = $this->user_model->getArticuloInfo($articuloId);
+            if($data['articulo']->{'idPrestamo'} == null){
+                $this->user_model->statusArticulo($articuloId, 0);
+                $this->session->set_flashdata('articulo_eliminado','El artículo se ha eliminado');
+                redirect('index.php/admin/consultar_articulo');
+            }
+            $this->session->set_flashdata('articulo_prestado','Este artículo no se puede eliminar porque actualmente está prestado');
+            redirect('index.php/admin/detalles_articulo/'.$articuloId);
+            /*           
+            $data['instalaciones'] = $this->user_model->getInstalaciones();
+            $data['categorias'] = $this->user_model->getCategorias();
+            $data['administradores'] = $this->user_model->getAdministradores();
+            $data['imagen'] = $this->user_model->getImagen($articuloId);
+            $data['recibo'] = $this->user_model->getRecibo($articuloId); 
+            */
         }
 
         public function view_img(){

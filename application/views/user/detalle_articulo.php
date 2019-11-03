@@ -44,6 +44,10 @@
             <td><?php if($empleado[0] != null){ echo $empleado[0]->nombre; } else { echo "Nadie"; } ?></td>
             </tr>
             <tr>
+            <th scope="row">Edificio</th>
+            <td><?php if($articulo->edificio != null){ echo $articulo->edificio; } else { echo "N/A"; } ?></td>
+            </tr>
+            <tr>
             <th scope="row">Dirección</th>
             <?php 
                 switch($articulo->direccion_idDireccion_fk){
@@ -109,6 +113,14 @@
                     <input type='hidden' id='detalle' name='detalle' value='<?php echo $articulo->idArticulo; ?>' />
                     <button type="submit" name="editar" class="btn btn-outline-primary">
                         <i class="fa fa-pencil-square-o"></i> Editar
+                    </button>
+                </div>
+        <?php echo form_close(); ?>
+        <?php echo form_open_multipart('index.php/admin/eliminar_articulo'); ?>
+                <div class="col padding">
+                    <input type='hidden' id='artID' name='artID' value='<?php echo $articulo->idArticulo; ?>' />
+                    <button type="submit" name="eliminar" class="btn btn-outline-danger">
+                        <i class="fa fa-times"></i> Eliminar
                     </button>
                 </div>
             </div>

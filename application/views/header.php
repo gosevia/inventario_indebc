@@ -80,6 +80,11 @@
             <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('user_loggedout').'</p>'; ?>
         <?php endif; ?>
 
+        <?php if($this->session->flashdata('cambios_usuario')): ?>
+            <?php echo '<p class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('cambios_usuario').'</p>'; ?>
+        <?php endif; ?>
+
         <?php if($this->session->flashdata('inactive_account')): ?>
             <?php echo '<p class="alert alert-danger alert-dismissible fade show">
             <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('inactive_account').'</p>'; ?>
@@ -88,6 +93,16 @@
         <?php if($this->session->flashdata('articulo_registrado')): ?>
             <?php echo '<p class="alert alert-success alert-dismissible fade show">
             <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('articulo_registrado').'</p>'; ?>
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata('articulo_eliminado')): ?>
+            <?php echo '<p class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('articulo_eliminado').'</p>'; ?>
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata('articulo_prestado')): ?>
+            <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('articulo_prestado').'</p>'; ?>
         <?php endif; ?>
 
         <?php if($this->session->flashdata('articulo_actualizado')): ?>

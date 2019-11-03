@@ -13,12 +13,12 @@
     </div>
     </li>
 
-    <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Usuarios</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Consultar</a>
-      <a class="dropdown-item" href="#">Gestionar</a>
-    </div>
+    <li class="nav-item">
+    <!--<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Usuarios</a>
+    <div class="dropdown-menu">-->
+      <a class="nav-link" href="<?php echo base_url(); ?>index.php/admin/consultar_usuario">Usuarios</a>
+      <!--<a class="dropdown-item" href="#">Gestionar</a>
+    </div>-->
     </li>
 
     <li class="nav-item dropdown">

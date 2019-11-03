@@ -1,5 +1,5 @@
 
-    <h3 style="text-align: center;">Consultar</h3>
+    <h3 style="text-align: center;">Consultar artículos</h3>
         <div class="consultar-table-container">
             <table id="solicitarTable" class="table table-striped table-bordered">
                 <thead>

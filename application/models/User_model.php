@@ -134,18 +134,19 @@
             $articulos = $this->input->post('articulosSelected');
 
             $count = count($articulos);
-            //EFECTUAR SPLIT A LA CADENA RESIVIDA DEL ARTICULO PARA UTILIZAR EL ID
+            // EFECTUAR SPLIT A LA CADENA RESIVIDA DEL ARTICULO PARA UTILIZAR EL ID
             $data = array();
-            
+            // OBTENER INFO PARA AGREGAR ID DE EMPLEADO A TODOS LOS ARTICULOS DEL MISMO PRESTAMO
+            $prestamo['info'] = $this->user_model->getPrestamoInfo($prestamoId);    
+            $empId = $prestamo['info']->{'empleado_fk'};
             $data['idPrestamo'] = $prestamoId;
             $data['status'] = 2;
+            $data['empleado_idEmpleado_fk'] = $empId;
             for($i = 0; $i < $count; $i++){
-
                 $id = $articulos[$i];
                 $this->db->where('idArticulo', $id);
                 $this->db->update('articulo', $data);
             }
-
         }
 
         public function actualizarArticulo(){
@@ -286,6 +287,22 @@
             return;
         }
 
+        public function statusArticulo($id, $status){
+            $data = array(
+                'status' => $status
+            );
+            $this->db->where("idArticulo", $id);
+            $this->db->update("articulo", $data); 
+        }
+
+        public function userRole($id, $rol){
+            $data = array(
+                'rol' => $rol
+            );
+            $this->db->where("idUsuario", $id);
+            $this->db->update("usuario", $data);
+        }
+
         public function deleteImagen($imgs){
             foreach($imgs as $img){
                 $name = $this->user_model->getImagenInfo($img);
@@ -320,7 +337,7 @@
         }
 
         public function getArticulos(){
-            $q = $this->db->select('*')->from('articulo')->order_by('num_inventario', 'asc')->get();
+            $q = $this->db->select('*')->from('articulo')->where('status != ', 0, FALSE)->order_by('num_inventario', 'asc')->get();
             $r = $q->result_array();
             return $r;
         }
@@ -394,8 +411,33 @@
             return $r;
         }
 
+        public function getPrestamoInfo($id){
+            $q = $this->db->get_where('prestamo', array('idPrestamo' => $id));
+            if($q->num_rows()==1){
+                return $q->result()[0]; 
+            }else{
+                return false;
+            }
+        }
+
+        public function getPrestamosFromId($id){
+            $q = $this->db->get_where('prestamo', array('empleado_fk' => $id));
+            if(empty($q->result())){
+                return null;
+            }else{
+                $r = $q->result_array();
+                return $r;
+            }
+        }
+
         public function getEmpleados(){
             $q = $this->db->get_where('usuario', array('rol' => 3, 'status' => 1));
+            $r = $q->result_array();
+            return $r;
+        }
+
+        public function getAllUsers(){
+            $q = $this->db->select('*')->from('usuario')->where('status', 1)->get();
             $r = $q->result_array();
             return $r;
         }

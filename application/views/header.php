@@ -154,4 +154,24 @@
             <?php echo '<p class="alert alert-success alert-dismissible fade show">
             <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('prestamo_registrado').'</p>'; ?>
         <?php endif; ?>
+
+        <?php if($this->session->flashdata('password_change')): ?>
+            <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('password_change').'</p>'; ?>
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata('password_success')): ?>
+            <?php echo '<p class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('password_success').'</p>'; ?>
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata('no_match')): ?>
+            <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('no_match').'</p>'; ?>
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata('wrong_password')): ?>
+            <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('wrong_password').'</p>'; ?>
+        <?php endif; ?>
 </div>

@@ -82,6 +82,14 @@ h4{
     border-radius: 10px;
     display: inline-block
 }
+.password-container{
+    border: solid 2px lightgray;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+    width: 40%;
+    padding: 1%;
+}
 .container-full-image{
     width: 90%;
     text-align: center;

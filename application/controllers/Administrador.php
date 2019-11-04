@@ -219,6 +219,38 @@
             redirect('index.php/admin/detalles_usuario/'.$usuarioId);
         }
 
+        public function password(){
+            $this->load->view('header');
+            $this->load->view('admin/admin');
+            $this->load->view('user/password');
+            $this->load->view('footer');
+        }
+
+        public function verify(){
+            $data['user'] = $this->user_model->getUserInfo($this->session->userdata['user_id']);
+            if(empty($_POST['actual']) || empty($_POST['nuevo']) || empty($_POST['confirmar'])){
+                $this->session->set_flashdata('password_change', 'Necesita llenar los 3 campos correctamente para cambiar contraseña.');
+                redirect(base_url().'index.php/admin/password/');
+            }
+            if($data['user'][0]->{'password'} == md5($_POST['actual'])){
+                if($_POST['nuevo'] == $_POST['confirmar']){
+                    $password = md5($this->input->post('nuevo'));
+                    $this->user_model->setPassword($this->session->userdata['user_id'], $password);
+                    $this->session->unset_userdata('user_id');
+                    $this->session->unset_userdata('logged_in');
+                    $this->session->unset_userdata('rol');
+                    $this->session->set_flashdata('password_success', 'Se ha cambiado su contraseña exitosamente. Vuelva a ingresar con los datos nuevos.');
+                    redirect(base_url().'index.php/user/login');     
+                }else{
+                    $this->session->set_flashdata('no_match', 'Su nueva contraseña debe ser igual para los últimos 2 campos.');
+                    redirect(base_url().'index.php/admin/password/');
+                }
+            }else{
+                $this->session->set_flashdata('wrong_password', 'Su contraseña actual no es correcta. Vuelva a intentar.');
+                redirect(base_url().'index.php/admin/password/');
+            }
+        }
+
         public function detalles_articulo(){
             if(isset($_POST['detalle'])){
                 $articuloId = $_POST['detalle'];

@@ -97,6 +97,10 @@
             ?>
             </tr>
             <tr>
+            <th scope="row">Documento de resguardo</th>
+            <td><a href="<?php echo base_url('uploads/resguardo/'.$resguardo->file_name); ?>" target="_blank">Ver documento</a></td>
+            </tr>
+            <tr>
             <th scope="row">Estado</th>
             <?php
                 switch($articulo->status){
@@ -119,7 +123,7 @@
         <?php echo form_open_multipart('index.php/admin/eliminar_articulo'); ?>
                 <div class="col padding">
                     <input type='hidden' id='artID' name='artID' value='<?php echo $articulo->idArticulo; ?>' />
-                    <button type="submit" name="eliminar" class="btn btn-outline-danger">
+                    <button type="submit" name="eliminar" class="btn btn-outline-danger" onclick="return confirm('¿Está seguro que quiere eliminar este artículo?');">
                         <i class="fa fa-times"></i> Eliminar
                     </button>
                 </div>

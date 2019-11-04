@@ -62,7 +62,7 @@
                     </div>  
                 </div>
                 <div class ="form-group">
-                <label class="font-weight-bold">Edificio</label>
+                    <label class="font-weight-bold">Edificio</label>
                     <input type="text" class="form-control" name="edificio" placeholder="Edificio" value="<?php echo set_value('edificio');?>">
                 </div>
                 <div class ="form-group">

@@ -167,6 +167,9 @@
             if(trim($this->input->post('modelo'), "\x00..\x1F") != null && trim($this->input->post('modelo'), "\x00..\x1F") != ''){
                 $data['modelo'] = $this->input->post('modelo');
             }
+            if(trim($this->input->post('edificio'), "\x00..\x1F") != null && trim($this->input->post('edificio'), "\x00..\x1F") != ''){
+                $data['edificio'] = $this->input->post('edificio');
+            }
             //Cargar base de datos de empleados
             $empleadosDB = $this->load->database('eusined', TRUE);
 
@@ -262,6 +265,7 @@
             return $this->db->insert('imagen',$data);
         }
 
+        //sube el resguardo en base la ID del articulo
         public function subirResguardo($resguardo, $articulo_id){
 
             $data = array(
@@ -319,6 +323,18 @@
             return;
         }
 
+        public function deleteResguardo($id){
+            $name = $this->user_model->getResguardoInfo($id);
+            //ELIMINAR ARCHIVO DEL SERVIDOR Y LUEGO DE LA BASE DE DATOS
+            //EL PATH ABSOLUTO PUEDE SER DIFERENTE AL SUBIR EL PROYECTO O PARA UNA MAQUINA DIFERENTE
+            if(unlink($_SERVER['DOCUMENT_ROOT'].'/inventario_indebc/uploads/resguardo/'.$name[0]['file_name'])){
+                $this->db->where("id", $id);
+                $this->db->delete("resguardo");
+            }else{
+                die("ERROR DELETING DOCUMENT");
+            }
+        }
+
         public function check_numInv_exists($numero){
             $query = $this->db->get_where('articulo', array('num_inventario'=> $numero));
             if(empty($query->row_array())){
@@ -357,6 +373,21 @@
 
         public function getRecibo($id){
             $q = $this->db->get_where('recibo', array('articuloId_fk' => $id));
+            $r = $q->result_array();
+            return $r;
+        }
+
+        public function getResguardo($id){
+            $q = $this->db->get_where('resguardo', array('articuloId_fk' => $id));
+            if($q->num_rows()==1){
+                return $q->result()[0]; 
+            }else{
+                return false;
+            }
+        }
+
+        public function getResguardoInfo($id){
+            $q = $this->db->get_where('resguardo', array('articuloId_fk' => $id));
             $r = $q->result_array();
             return $r;
         }

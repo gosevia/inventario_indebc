@@ -102,7 +102,13 @@ h4{
     padding-bottom: 1rem;
 }
 .thumbnail-container{
-    padding-right: 1rem;
+    padding: 0.5em;
+}
+.label-for-check {
+    padding: 0.5em;
+}
+.check-with-img:checked + .label-for-check {
+    background-color: #ff0000;
 }
 #estado1{
     color: white;

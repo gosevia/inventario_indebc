@@ -10,7 +10,8 @@
         <?php foreach($img as $file): ?>
             <?php if($tipo == '1'): ?>
                 <img src="<?php echo base_url('uploads/receipt/'.$file['file_name']); ?>" alt="Imagen no disponible" title="<?php echo $file['file_name']; ?>" />
-            <?php else: ?>
+            <?php endif; ?>
+            <?php if($tipo == '0'): ?>
                 <img src="<?php echo base_url('uploads/image/'.$file['file_name']); ?>" alt="Imagen no disponible" title="<?php echo $file['file_name']; ?>" />
             <?php endif; ?>
         <?php endforeach; ?>    

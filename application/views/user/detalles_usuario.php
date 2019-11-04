@@ -50,9 +50,10 @@
         </div>
         <div class="prestamos-container">
             <table class="table table-striped table-bordered">
+            <th scope="col">Préstamos a nombre de este usuario</th>
             <?php 
                 if($prestamos == null){
-                    echo "<tr><td><strong>Este usuario no tiene préstamos a su nombre.</strong></td></tr>";
+                    echo "<tr><td><em>Este usuario no tiene préstamos a su nombre.</em></td></tr>";
                 }else{
                     foreach($prestamos as $row){
                         echo "<tr><td><strong>ID:</strong> ".$row['idPrestamo']." <strong>Estatus:</strong> ";

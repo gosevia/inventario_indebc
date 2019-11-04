@@ -262,6 +262,7 @@
             $data['empleado'] = $this->user_model->getUserInfo($data['articulo']->empleado_idEmpleado_fk);
             $data['imagen'] = $this->user_model->getImagen($articuloId);
             $data['recibo'] = $this->user_model->getRecibo($articuloId); 
+            $data['resguardo'] = $this->user_model->getResguardo($articuloId);
             $this->load->view('header');
             $this->load->view('admin/admin');
             $this->load->view('user/detalle_articulo',$data);
@@ -281,6 +282,7 @@
             $data['administradores'] = $this->user_model->getAdministradores();
             $data['imagen'] = $this->user_model->getImagen($articuloId);
             $data['recibo'] = $this->user_model->getRecibo($articuloId); 
+            $data['resguardo'] = $this->user_model->getResguardo($articuloId);
             
             if($this->form_validation->run() === FALSE){
                 $this->load->view('header');
@@ -309,6 +311,14 @@
                 $this->load->library('upload', $config, 'fotoUpload');
                 $this->fotoUpload->initialize($config);
                  
+                //Configuracion para resguardo
+                $config=array();
+                $config['allowed_types'] = 'jpg|jpeg|png|pdf';
+                $config['max_size'] = '10000';
+                $config['upload_path'] = './uploads/resguardo';
+                $this->load->library('upload',$config,'resguardoUpload');
+                $this->resguardoUpload->initialize($config);
+
                 //Subir Recibos 
                 $count = 0;
                 $reciboCount = $this->user_model->getReciboCount($articuloId);
@@ -401,6 +411,19 @@
                     }
                 }
  
+                //Subir resguardo
+                if(!empty($_FILES['userfile']['name'])){
+                    if($this->resguardoUpload->do_upload('userfile')){
+                        $uploadData = $this->resguardoUpload->data();
+                        $filename = $uploadData['file_name'];
+                        $filename_resguardo = $filename;
+                    }else{
+                        $this->session->set_flashdata('error_resguardo','Ha habido un error al subir el archivo o imágen del resguardo.
+                                    Verifica que sea tipo jpg, jpeg, png o pdf');                                
+                                    redirect('index.php/admin/registrar_articulo');
+                    }
+                }
+
                 if($this->user_model->actualizarArticulo()){
                     //Guardar los recibos en las base de datos
                     foreach($filename_recibos as $filename){
@@ -410,6 +433,14 @@
                     foreach($filename_fotos as $filename){
                         $this->user_model->subirFoto($filename, $articuloId);
                     }
+                    //Guardar archivo o imagen de resguardo
+                    if($filename_resguardo != null){
+                        $this->user_model->subirResguardo($filename_resguardo, $articuloId);
+                        // Eliminar el resguardo anterior
+                        $resguardo = $this->user_model->getResguardoInfo($articuloId);
+                        $this->user_model->deleteResguardo($resguardo[0]['id']);
+                    }
+                    
                     $imgArray = array();
                     if(isset($_POST['imgCheck'])){
                         foreach($_POST['imgCheck'] as $img){
@@ -465,10 +496,10 @@
             $img = $this->uri->segment(3);
             $tipo = $this->uri->segment(4);
             $data['tipo'] = $tipo;
-            if($tipo == '0'){
-                $data['img'] = $this->user_model->getImagenInfo($img);
-            }else{
-                $data['img'] = $this->user_model->getReciboInfo($img);
+            switch($tipo){
+                case 0: $data['img'] = $this->user_model->getImagenInfo($img); break;
+                case 1: $data['img'] = $this->user_model->getReciboInfo($img); break;
+                //case 2: $data['img'] = $this->user_model->getResguardoInfo($img); break;
             }
             $this->load->view('user/fullSizeImg', $data);
         }

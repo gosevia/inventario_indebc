@@ -24,7 +24,11 @@
     <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Préstamos</a>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/admin/registrar_prestamo">Registrar</a>
+    
+      <h5 class= "dropdown-header">Registrar</h5>
+      <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/admin/registrar_prestamo_temp">Préstamo temporal</a>
+      <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/admin/registrar_prestamo_perm">Préstamo permanente</a>
+      <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#">Consultar</a>
     </div>
     </li>

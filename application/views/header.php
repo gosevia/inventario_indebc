@@ -174,4 +174,9 @@
             <?php echo '<p class="alert alert-danger alert-dismissible fade show">
             <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('wrong_password').'</p>'; ?>
         <?php endif; ?>
+        
+        <?php if($this->session->flashdata('prestamo_error')): ?>
+            <?php echo '<p class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('prestamo_error').'</p>'; ?>
+        <?php endif; ?>
 </div>

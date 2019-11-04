@@ -473,7 +473,7 @@
             $this->load->view('user/fullSizeImg', $data);
         }
 
-        public function registrar_prestamo(){
+        public function registrar_prestamo_temp(){
             $data['articulos'] = $this->user_model->getArticulos();
             $data['administradores'] = $this->user_model->getAdministradores();
             $data['practicantes'] = $this->user_model->getPracticantes();
@@ -490,15 +490,46 @@
             if($this->form_validation->run() === FALSE){
                 $this->load->view('header',$data);
                 $this->load->view('admin/admin');
-                $this->load->view('user/registrar_prestamo',$data);
+                $this->load->view('user/registrar_prestamo_temp',$data);
                 $this->load->view('footer');
             }else{
-                if($this->user_model->registrarPrestamo()){
+                if($this->user_model->registrarPrestamo(1)){
                     $this->user_model->insertPrestamoArticulo();
                     $this->session->set_flashdata('prestamo_registrado','El préstamo ha sido registrado');
-                    redirect('index.php/admin/registrar_prestamo');
+                    redirect('index.php/admin/registrar_prestamo_temp');
                 }else{
+                    $this->session->set_flashdata('prestamo_error','Ha habido un error al registrar el préstamo a la base de datos. Inténtelo de nuevo');
+                    redirect('index.php/admin/registrar_prestamo_temp');
+                }
+            }
+        }
 
+        public function registrar_prestamo_perm(){
+            $data['articulos'] = $this->user_model->getArticulos();
+            $data['administradores'] = $this->user_model->getAdministradores();
+            $data['practicantes'] = $this->user_model->getPracticantes();
+            $data['empleados'] = $this->user_model->getEmpleados();
+
+            $this->form_validation->set_rules('prestamo','Número de préstamo','required');
+            $this->form_validation->set_rules('fecha_inicial','Fecha inicial','required');
+            $this->form_validation->set_rules('encargado','Encargado','required');
+            $this->form_validation->set_rules('prestamista','Prestamista','required');
+            $this->form_validation->set_rules('empleado','Empleado','required');
+            $this->form_validation->set_rules('articulosSelected[]','Artículos','required');
+
+            if($this->form_validation->run() === FALSE){
+                $this->load->view('header',$data);
+                $this->load->view('admin/admin');
+                $this->load->view('user/registrar_prestamo_perm',$data);
+                $this->load->view('footer');
+            }else{
+                if($this->user_model->registrarPrestamo(2)){
+                    $this->user_model->insertPrestamoArticulo();
+                    $this->session->set_flashdata('prestamo_registrado','El préstamo ha sido registrado');
+                    redirect('index.php/admin/registrar_prestamo_perm');
+                }else{
+                    $this->session->set_flashdata('prestamo_error','Ha habido un error al registrar el préstamo a la base de datos. Inténtelo de nuevo');
+                    redirect('index.php/admin/registrar_prestamo_temp');
                 }
             }
         }

@@ -29,7 +29,7 @@
       <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/admin/registrar_prestamo_temp">Préstamo temporal</a>
       <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/admin/registrar_prestamo_perm">Préstamo permanente</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Consultar</a>
+      <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/admin/consultar_prestamo">Consultar</a>
     </div>
     </li>
 

@@ -185,6 +185,14 @@
             $this->load->view('footer');
         }
 
+        public function consultar_prestamo(){
+            $data['prestamos'] = $this->user_model->getPrestamos();
+            $this->load->view('header');
+            $this->load->view('admin/admin');
+            $this->load->view('user/consultar_prestamo', $data);
+            $this->load->view('footer');
+        }
+
         public function consultar_usuario(){
             $data['usuarios'] = $this->user_model->getAllUsers();
             $this->load->view('header');

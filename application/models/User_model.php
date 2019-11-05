@@ -449,6 +449,12 @@
             return $r;
         }
 
+        public function getPrestamos(){
+            $q = $this->db->select('*')->from('prestamo')->order_by('idPrestamo','asc')->get();
+            $r = $q->result_array();
+            return $r;
+        }
+
         public function getPrestamoInfo($id){
             $q = $this->db->get_where('prestamo', array('idPrestamo' => $id));
             if($q->num_rows()==1){

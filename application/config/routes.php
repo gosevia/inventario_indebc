@@ -64,6 +64,7 @@ $route['admin/detalles_articulo/(:any)'] = 'administrador/detalles_articulo';
 $route['admin/registrar_prestamo_temp'] = 'administrador/registrar_prestamo_temp';
 $route['admin/registrar_prestamo_perm'] = 'administrador/registrar_prestamo_perm';
 $route['admin/consultar_articulo'] = 'administrador/consultar_articulo';
+$route['admin/consultar_prestamo'] = 'administrador/consultar_prestamo';
 $route['admin/registrar_articulo'] = 'administrador/registrar_articulo';
 $route['user/logout'] = 'user/logout';
 $route['soporte'] = 'soporte/menu';

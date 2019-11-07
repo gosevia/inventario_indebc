@@ -485,4 +485,14 @@
             $r = $q->result_array();
             return $r;
         }
+
+        public function getArticulosPrestamo($id){
+            $q = $this->db->get_where('articulo', array('idPrestamo' => $id));
+            if(empty($q->result())){
+                return null;
+            }else{
+                $r = $q->result_array();
+                return $r;
+            }
+        }
     }

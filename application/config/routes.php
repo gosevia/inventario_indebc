@@ -60,6 +60,7 @@ $route['admin/view_img/(:any)/(:any)'] = 'administrador/view_img';
 $route['admin/editar_articulo'] = 'administrador/editar_articulo';
 $route['admin/editar_articulo/(:any)'] = 'administrador/editar_articulo';
 $route['admin/detalles_articulo'] = 'administrador/detalles_articulo';
+$route['admin/detalles_prestamo'] = 'administrador/detalles_prestamo';
 $route['admin/detalles_articulo/(:any)'] = 'administrador/detalles_articulo';
 $route['admin/registrar_prestamo_temp'] = 'administrador/registrar_prestamo_temp';
 $route['admin/registrar_prestamo_perm'] = 'administrador/registrar_prestamo_perm';

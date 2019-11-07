@@ -214,6 +214,17 @@
             $this->load->view('user/detalles_usuario', $data);
             $this->load->view('footer');
         }
+
+        public function detalles_prestamo(){
+            $prestamoId = $_POST['detalle'];
+            $data['prestamo'] = $this->user_model->getPrestamoInfo($prestamoId);
+            $data['empleadosDB'] = $this->load->database('eusined', TRUE);
+            $data['articulos'] = $this->user_model->getArticulosPrestamo($prestamoId);
+            $this->load->view('header');
+            $this->load->view('admin/admin');
+            $this->load->view('user/detalles_prestamo', $data);
+            $this->load->view('footer');
+        }
         
         public function actualizar_usuario(){
             if(isset($_POST['idUsuario'])){

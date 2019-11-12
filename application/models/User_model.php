@@ -495,4 +495,29 @@
                 return $r;
             }
         }
+
+        public function getPrestamosEmpleado($rfc){
+            $empleadosDB = $this->load->database('eusined', TRUE);
+            $result = $empleadosDB->get_where('empleado',array('rfc' => $rfc));
+            $id = $result->row(0)->idEmpleado;
+
+            $q = $this->db->get_where('prestamo', array('empleado_fk' => $id));
+            if(empty($q->result())){
+                return null;
+            }else{
+                $r = $q->result_array();
+                return $r;
+            }
+        }
+
+        public function detalles_prestamo(){
+            $prestamoId = $_POST['detalle'];
+            $data['prestamo'] = $this->user_model->getPrestamoInfo($prestamoId);
+            $data['empleadosDB'] = $this->load->database('eusined', TRUE);
+            $data['articulos'] = $this->user_model->getArticulosPrestamo($prestamoId);
+            $this->load->view('header');
+            $this->load->view('empleado/empleado');
+            $this->load->view('user/detalles_prestamo', $data);
+            $this->load->view('footer');
+        }
     }

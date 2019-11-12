@@ -70,6 +70,7 @@
                         $user_data = array(
                             'user_id' => $userInfo[0]->idUsuario,
                             'rol' => $userInfo[0]->rol,
+                            'correo_rfc'=>$userInfo[0]->correo_rfc,
                             'logged_in' => true
                         );
                         $this->session->set_userdata($user_data);

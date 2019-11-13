@@ -67,7 +67,11 @@
                         case 2: echo "<td id='estado3'>Prestado</tc>"; break; 
                     }
                     echo '<td>';
-                    echo form_open('index.php/admin/detalles_articulo');
+                    if($this->session->userdata('rol')==1){
+                        echo form_open('index.php/admin/detalles_articulo');
+                    }else{
+                        echo form_open('index.php/soporte/detalles_articulo');
+                    }
                     echo "<input type='hidden' id='detalle' name='detalle' value='".$row['idArticulo']."' />";
                     echo '<button class="btn btn-outline-primary" type="submit" value=""><i class="fa fa-search" id="submit"></i></button>';
                     echo form_close();

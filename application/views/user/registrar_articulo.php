@@ -2,7 +2,11 @@
         <div class="register-container" style="margin:1rem; ">
             <h2>Registrar artículo</h2>
             <?php echo validation_errors(); ?>
-            <?php echo form_open_multipart('index.php/admin/registrar_articulo'); ?>
+            <?php if($this->session->userdata('rol')==1){
+                echo form_open_multipart('index.php/admin/registrar_articulo');
+             }else{
+                echo form_open_multipart('index.php/soporte/registrar_articulo');
+             } ?>
                 <div class ="form-group">
                     <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="<?php echo set_value('nombre');?>">
                 </div>

@@ -1,6 +1,12 @@
     <div class="password-container">
         <h3 style="text-align: center">Cambiar Contraseña</h3>
-        <?php echo form_open('index.php/admin/verify'); ?>
+        <?php if($this->session->userdata('rol')==1){
+            echo form_open('index.php/admin/verify');
+         }else if($this->session->userdata('rol')==2){
+            echo form_open('index.php/soporte/verify');
+         }else{
+            echo form_open('index.php/empleado/verify');
+         } ?>
             <div class="row">
                 <div class="col-md col-md-offset-4">
                     <div class="input-group mb-3">   

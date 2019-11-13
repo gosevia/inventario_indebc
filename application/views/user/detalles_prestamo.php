@@ -1,7 +1,13 @@
 <h3 style="text-align: center;">Detalles de préstamo</h3>
     <div class="detalles-container">
         <div class="detalles-table-container">
-            <?php echo form_open('index.php/admin/detalles_prestamo'); ?>
+            <?php 
+                if($this->session->userdata('rol')==1){
+                    echo form_open('index.php/admin/detalles_prestamo');
+                }else{
+                    echo form_open('index.php/soporte/detalles_prestamo');
+                } 
+            ?>
             <table class="table table-striped table-bordered">
                 <tr>
                 <th scope="col">ID</th>

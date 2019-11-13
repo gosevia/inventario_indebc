@@ -2,7 +2,11 @@
         <h2>Registrar préstamo temporal</h2>
             <?php echo validation_errors(); ?>
             <?php $submit = array('onsubmit' => "document.getElementById('articulos').disabled = false;"); ?>
-            <?php echo form_open('index.php/admin/registrar_prestamo_temp', $submit); ?>
+            <?php if($this->session->userdata('rol')==1){
+                echo form_open('index.php/admin/registrar_prestamo_temp', $submit);
+             }else{
+                echo form_open('index.php/soporte/registrar_prestamo_temp', $submit);
+             } ?>
                 <div class ="form-group">
                     <input type="number" class="form-control" name="prestamo" placeholder="Número de préstamo"value="<?php echo set_value('prestamo');?>">
                 </div>
@@ -140,7 +144,11 @@
                                 case 2: echo "<td id='estado3' class='prestado'>Prestado</td>"; break; 
                             }
                             echo '<td>';
-                            echo form_open('index.php/admin/detalles_articulo');
+                            if($this->session->userdata('rol')==1){
+                                echo form_open('index.php/admin/detalles_articulo');
+                            }else{
+                                echo form_open('index.php/soprte/detalles_articulo');
+                            }
                             echo "<input type='hidden' id='detalle' name='detalle' value='".$row['idArticulo']."' />";
                             echo '<button class="btn btn-outline-primary" type="submit" value=""><i class="fa fa-search" id="submit"></i></button>';
                             echo form_close();

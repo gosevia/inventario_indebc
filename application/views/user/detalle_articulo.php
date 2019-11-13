@@ -111,7 +111,13 @@
             ?>
             </tr>
         </table>
-        <?php echo form_open_multipart('index.php/admin/editar_articulo'); ?>
+        <?php 
+            if($this->session->userdata('rol')==1){
+                echo form_open_multipart('index.php/admin/editar_articulo');
+            }else{
+                echo form_open_multipart('index.php/soporte/editar_articulo');
+            }
+        ?>
             <div class="row">
                 <div class="col padding">
                     <input type='hidden' id='detalle' name='detalle' value='<?php echo $articulo->idArticulo; ?>' />
@@ -120,7 +126,7 @@
                     </button>
                 </div>
         <?php echo form_close(); ?>
-        <?php echo form_open_multipart('index.php/admin/eliminar_articulo'); ?>
+        <?php if($this->session->userdata('rol')==1){ echo form_open_multipart('index.php/admin/eliminar_articulo'); ?>
                 <div class="col padding">
                     <input type='hidden' id='artID' name='artID' value='<?php echo $articulo->idArticulo; ?>' />
                     <button type="submit" name="eliminar" class="btn btn-outline-danger" onclick="return confirm('¿Está seguro que quiere eliminar este artículo?');">
@@ -128,7 +134,7 @@
                     </button>
                 </div>
             </div>
-        <?php echo form_close(); ?>
+        <?php echo form_close(); }?>
     </div>
     <div class="fotos-container">
         <div class="image-container">

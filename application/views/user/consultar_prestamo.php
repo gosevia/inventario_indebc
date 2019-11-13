@@ -37,7 +37,11 @@
                         case 2: echo "<td id='estado3'>Permanente</tc>"; break; 
                     }
                     echo '<td>';
-                    echo form_open('index.php/admin/detalles_prestamo');
+                    if($this->session->userdata('rol')==1){
+                        echo form_open('index.php/admin/detalles_prestamo');
+                    }else{
+                        echo form_open('index.php/soporte/detalles_prestamo');
+                    }
                     echo "<input type='hidden' id='detalle' name='detalle' value='".$row['idPrestamo']."' />";
                     echo '<button class="btn btn-outline-primary" type="submit" value=""><i class="fa fa-search" id="submit"></i></button>';
                     echo form_close();

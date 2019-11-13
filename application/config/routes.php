@@ -52,6 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['empleado/prestamos_empleado'] = 'empleado/prestamos_empleado';
 $route['empleado/detalles_prestamo'] = 'empleado/detalles_prestamo';
 $route['empleado/password'] = 'empleado/password';
+$route['empleado/verify'] = 'empleado/verify';
+$route['empleado'] = 'empleado/menu';
+
 $route['admin/verify'] = 'administrador/verify';
 $route['admin/password'] = 'administrador/password';
 $route['admin/actualizar_usuario'] = 'administrador/actualizar_usuario';
@@ -70,12 +73,28 @@ $route['admin/registrar_prestamo_perm'] = 'administrador/registrar_prestamo_perm
 $route['admin/consultar_articulo'] = 'administrador/consultar_articulo';
 $route['admin/consultar_prestamo'] = 'administrador/consultar_prestamo';
 $route['admin/registrar_articulo'] = 'administrador/registrar_articulo';
-$route['user/logout'] = 'user/logout';
-$route['soporte'] = 'soporte/menu';
-$route['empleado'] = 'empleado/menu';
 $route['admin'] = 'administrador/menu';
+
+$route['soporte'] = 'soporte/menu';
+$route['soporte/verify'] = 'soporte/verify';
+$route['soporte/password'] = 'soporte/password';
+$route['soporte/eliminar_articulo'] = 'soporte/eliminar_articulo';
+$route['soporte/view_img/(:any)/(:any)'] = 'soporte/view_img';
+$route['soporte/editar_articulo'] = 'soporte/editar_articulo';
+$route['soporte/editar_articulo/(:any)'] = 'soporte/editar_articulo';
+$route['soporte/detalles_articulo'] = 'soporte/detalles_articulo';
+$route['soporte/detalles_prestamo'] = 'soporte/detalles_prestamo';
+$route['soporte/detalles_articulo/(:any)'] = 'soporte/detalles_articulo';
+$route['soporte/registrar_prestamo_temp'] = 'soporte/registrar_prestamo_temp';
+$route['soporte/registrar_prestamo_perm'] = 'soporte/registrar_prestamo_perm';
+$route['soporte/consultar_articulo'] = 'soporte/consultar_articulo';
+$route['soporte/consultar_prestamo'] = 'soporte/consultar_prestamo';
+$route['soporte/registrar_articulo'] = 'soporte/registrar_articulo';
+
+$route['user/logout'] = 'user/logout';
 $route['user/login'] = 'user/login';
 $route['user'] = 'user/$1';
+
 $route['default_controller'] = 'user';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -126,15 +126,17 @@
                     </button>
                 </div>
         <?php echo form_close(); ?>
-        <?php if($this->session->userdata('rol')==1){ echo form_open_multipart('index.php/admin/eliminar_articulo'); ?>
+        <?php echo form_open_multipart('index.php/admin/eliminar_articulo'); ?>
                 <div class="col padding">
                     <input type='hidden' id='artID' name='artID' value='<?php echo $articulo->idArticulo; ?>' />
+                    <?php if($this->session->userdata('rol')==1){ ?>
                     <button type="submit" name="eliminar" class="btn btn-outline-danger" onclick="return confirm('¿Está seguro que quiere eliminar este artículo?');">
                         <i class="fa fa-times"></i> Eliminar
                     </button>
+                    <?php } ?>
                 </div>
             </div>
-        <?php echo form_close(); }?>
+        <?php echo form_close(); ?>
     </div>
     <div class="fotos-container">
         <div class="image-container">

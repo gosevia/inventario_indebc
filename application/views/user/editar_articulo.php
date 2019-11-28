@@ -20,69 +20,94 @@
                     <input type="number" class="form-control" name="inventario" placeholder="Número de inventario" value="<?php echo $articulo->num_inventario; ?>">
                 </div>
                 <div class ="form-group">
-                    <input type="text" class="form-control" name="serie" placeholder="Número de serie"value="<?php echo $articulo->num_serie; ?>">
+                    <input type="text" class="form-control" name="serie" placeholder="Número de serie" value="<?php echo $articulo->num_serie; ?>">
                 </div>
-                <p style="color: red; font-weight: bold;">NOTA: MANTENER EN BLANCO LOS SIGUIENTES CAMPOS DE VALORES QUE DESEA CONSERVAR. SOLO MODIFIQUE LOS CAMPOS QUE DESEA CAMBIAR.</p>
                 <div class ="form-group">
                     <label for="categoriaSelect" class="font-weight-bold">Categoría</label>
                     <div>
-                        <select id="categoriaSelect" class="form-control" name="categoria" value="<?php echo set_value('categoria');?>">
-                            <option></option>
-                            <?php
-                                foreach($categorias as $row){
-                                    $categoria_name = $row['nombre'];
-                                    echo "<option value='$categoria_name'>$categoria_name</option>";
-                                }
-                            ?>
-                        </select>
+                        <?php
+                            $options = array();
+                            foreach($categorias as $row){
+                                $options[$row['idCategoria']] = $row['nombre'];
+                            }
+                            echo form_dropdown('categoria', $options, $articulo->categoria_idCategoria_fk, "class='form-control'");
+                        ?>
                     </div>                
                 </div>
                 <div class ="form-group">
                     <label class="font-weight-bold" for="complejoSelect" >Instalación</label>
                     <div>
-                    <!-- CARGAR DIRECTAMENTE DE TABLA DE INSTALACIONES-->
-                        <select id="complejoSelect" class="form-control" name="instalacion" value="<?php echo set_value('instalacion');?>">
-                            <option></option>
-                            <?php
-                                foreach($instalaciones as $row){
-                                    $instalacion_name = $row['instalacion'];
-                                    echo"<option value='$instalacion_name'>$instalacion_name</option>";
-                                }
-                            ?>
-                        </select>
+                        <?php
+                            $options = array();
+                            foreach($instalaciones as $row){
+                                $options[$row['idInstalacion']] = $row['instalacion'];
+                            }
+                            echo form_dropdown('instalacion', $options, $articulo->instalacion_idInstalacion_fk, "class='form-control'");
+                        ?>
                     </div>           
                 </div>
                 <div class ="form-group">
                 <label class="font-weight-bold" for="direccionSelect">Dirección</label>
                     <div>
-                        <select id="direccionSelect" class="form-control" name="direccion" value="<?php echo set_value('direccion');?>">
-                            <option></option>
-                            <option value = 'Dirección General'>Dirección General</option>
-                            <option value = 'Dirección Administrativa'>Dirección Administrativa</option>
-                            <option value = 'DANC Y CF'>DANC Y CF</option>
-                            <option value = 'Dirección Promoción e Imagen'>Dirección Promoción e Imagen</option>
-                            <option value = 'Dirección de Desarrollo del Deporte'>Dirección de Desarrollo del Deporte</option>
-                            <option value = 'Dirección de Infraestructura Deportiva'>Dirección de Infraestructura Deportiva</option>
-                        </select>
+                        <?php
+                        $options = array(
+                            'Dirección General' => 'Dirección General',
+                            'Dirección Administrativa' => 'Dirección Administrativa',
+                            'DANC Y CF' => 'DANC Y CF',
+                            'Dirección Promoción e Imagen' => 'Dirección Promoción e Imagen',
+                            'Dirección de Desarrollo del Deporte' => 'Dirección de Desarrollo del Deporte',
+                            'Dirección de Infraestructura Deportiva' => 'Dirección de Infraestructura Deportiva'
+                        );
+                        switch($articulo->direccion_idDireccion_fk){
+                            case 1:
+                            case 7:
+                            case 13:
+                            case 19:
+                            case 25: $currentDir = "Dirección General"; break;
+                            case 2: 
+                            case 8:
+                            case 14:
+                            case 20:
+                            case 26: $currentDir = "Dirección Administrativa"; break;
+                            case 3: 
+                            case 9: 
+                            case 15:
+                            case 21:
+                            case 27: $currentDir = "DANC Y CF"; break;
+                            case 4:
+                            case 10:
+                            case 16:
+                            case 22:
+                            case 28: $currentDir = "Dirección Promoción e Imagen"; break;
+                            case 5:
+                            case 11:
+                            case 17:
+                            case 23:
+                            case 29: $currentDir = "Dirección de Desarrollo del Deporte"; break;
+                            case 6:
+                            case 12:
+                            case 18:
+                            case 24:
+                            case 30: $currentDir = "Dirección de Infraestructura Deportiva"; break;
+                        }
+                        echo form_dropdown('direccion', $options, $currentDir, "class='form-control'");
+                        ?>
                     </div>  
                 </div>
                 <div class ="form-group">
                     <label class="font-weight-bold">Edificio</label>
-                    <input type="text" class="form-control" name="edificio" placeholder="Edificio" value="<?php echo set_value('edificio');?>">
+                    <input type="text" class="form-control" name="edificio" placeholder="Edificio" value="<?php echo $articulo->edificio; ?>">
                 </div>
                 <div class ="form-group">
                     <label class="font-weight-bold" for="encargadoSelect" >Encargado del artículo (Administradores)</label>
                     <div>
-                    <!-- CARGAR DIRECTAMENTE DE TABLA DE INSTALACIONES-->
-                        <select id="encargadoSelect" class="form-control" name="encargado" value="<?php echo set_value('encargado');?>">
-                            <option></option>
-                            <?php
-                                foreach($administradores as $row){
-                                    $encargado_name = $row['nombre'];
-                                    echo"<option value='$encargado_name'>$encargado_name</option>";
-                                }
-                            ?>
-                        </select>
+                        <?php
+                            $options = array();
+                            foreach($administradores as $row){
+                                $options[$row['idUsuario']] = $row['nombre'];
+                            }
+                            echo form_dropdown('encargado', $options, $articulo->encargado_fk, "class='form-control'");
+                        ?>
                     </div>           
                 </div>
                 <div class ="form-group">

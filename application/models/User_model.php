@@ -176,19 +176,13 @@
             //Obtener el id de la categoria seleccionada
             if(trim($this->input->post('categoria'), "\x00..\x1F") != null && trim($this->input->post('categoria'), "\x00..\x1F") != ''){
                 $categoria = $this->input->post('categoria');
-                $this->db->where('nombre', $categoria);
-                $result = $this->db->get('categoria');
-                $cat_id = $result->row(0)->idCategoria;
-                $date['categoria_idCategoria_fk'] = $cat_id;
+                $data['categoria_idCategoria_fk'] = $categoria;
             }
             
             //Obtener el id de la instalacion seleccionada
             if(trim($this->input->post('instalacion'), "\x00..\x1F") != null && trim($this->input->post('instalacion'), "\x00..\x1F") != ''){
                 $instalacion = $this->input->post('instalacion');
-                $this->db->where('instalacion', $instalacion);
-                $result = $this->db->get('instalacion');
-                $instalacion_id = $result->row(0)->idInstalacion;
-                $data['instalacion_idInstalacion_fk'] = $instalacion_id;
+                $data['instalacion_idInstalacion_fk'] = $instalacion;
             }            
             
             //Obtener el id de la Direccion seleccionada
@@ -204,9 +198,8 @@
                 $data['direccion_idDireccion_fk'] = $direccion_id;
             }else if(trim($this->input->post('direccion'), "\x00..\x1F") != null && trim($this->input->post('direccion'), "\x00..\x1F") != ''){    
                 $direccion = $this->input->post('direccion');
-                $inst = $this->user_model->getArticuloInfo($this->input->post('detalle'));
-                $this->db->where('instalacion_idInstalacion_fk', $inst->instalacion_idInstalacion_fk);
                 $this->db->where('direccion', $direccion);
+                $this->db->where('instalacion_idInstalacion_fk', $this->input->post('instalacion'));
                 $result = $this->db->get('direccion');
                 $direccion_id = $result->row(0)->idDireccion;
                 $data['direccion_idDireccion_fk'] = $direccion_id;
@@ -215,13 +208,7 @@
             //Obtener el id del encargado de la base de datos de empleados
             if(trim($this->input->post('encargado'), "\x00..\x1F") != null && trim($this->input->post('encargado'), "\x00..\x1F") != ''){
                 $encargado = $this->input->post('encargado');
-                $this->db->where('nombre', $encargado);
-                $result = $this->db->get('usuario');
-                $rfc = $result->row(0)->correo_rfc;
-                $empleadosDB->where('RFC', $rfc);
-                $result = $empleadosDB->get('empleado');
-                $encargado_id = $result->row(0)->idEmpleado;
-                $data['encargado_fk'] = $encargado_id;
+                $data['encargado_fk'] = $encargado;
             }
             /*
             $data = array(
@@ -426,13 +413,13 @@
         }
 
         public function getInstalaciones(){
-            $q = $this->db->select('*')->from('instalacion')->order_by('instalacion','asc')->get();
+            $q = $this->db->select('*')->from('instalacion')->get();
             $r = $q->result_array();
             return $r;
         }
 
         public function getCategorias(){
-            $q = $this->db->select('*')->from('categoria')->order_by('nombre','asc')->get();
+            $q = $this->db->select('*')->from('categoria')->get();
             $r = $q->result_array();
             return $r;
         }

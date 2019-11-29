@@ -1,7 +1,7 @@
         <?php echo validation_errors(); ?>
             <br />
             <div class="login-container">
-                <h4><strong>INDEBC | SISTEMA DE INVENTARIO</strong></h4>
+                <h4><strong>INDE | SISTEMA DE INVENTARIO</strong></h4>
                 <?php echo form_open('index.php/user/login'); ?>
                     <div class="row">
                         <div class="col-md col-md-offset-4">
@@ -17,7 +17,7 @@
                     </div>
                     <div class="row">
                         <div class="col padding">
-                            <button type="submit" name="iniciar" class="btn btn-outline-dark">
+                            <button type="submit" name="iniciar" style="background-color: #691b33; border: #691b33 2px solid" class="btn btn-primary">
                                 <i class="fa fa-sign-in"></i> Iniciar Sesión
                             </button>
                         </div>

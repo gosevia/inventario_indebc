@@ -3,8 +3,11 @@
     padding-top: 5px;
     text-align: center;
 }
-a {
+.nav .nav-item a{
     color: #691b33;
+}
+.nav .nav-item a:hover{
+    color: blue !important;
 }
 h4{
     font-family: 'Montserrat', sans-serif;

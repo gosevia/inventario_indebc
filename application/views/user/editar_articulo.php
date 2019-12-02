@@ -86,6 +86,31 @@
                     </div>           
                 </div>
                 <div class ="form-group">
+                <label class="font-weight-bold" for="estado">Estado del artículo</label>
+                    <div>
+                        <select id="estadoSelect" class="form-control" name="estado" value="<?php echo $articulo->status;?>">
+                            <option></option>
+                            <?php if($articulo->status == 0){ ?>
+                                <option value = '0' selected = "selected">Baja</option>
+                            <?php }else{?>
+                                <option value = '0'>Baja</option>
+                            <?php } ?>
+
+                            <?php if($articulo->status == 1){ ?>
+                                <option value = '1' selected = "selected">Activo</option>
+                            <?php }else{?>
+                                <option value = '1'>Activo</option>
+                            <?php } ?>
+
+                            <?php if($articulo->status == 2){ ?>
+                                <option value = '2' selected = "selected">Prestado</option>
+                            <?php }else{?>
+                                <option value = '2'>Prestado</option>
+                            <?php } ?>
+                        </select>
+                    </div>  
+                </div>
+                <div class ="form-group">
                     <label class="font-weight-bold">Fecha de compra</label>
                     <input type="date" class="form-control" name="fecha_compra" value="<?php echo $articulo->fecha_compra; ?>">
                 </div>

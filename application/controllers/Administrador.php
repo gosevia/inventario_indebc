@@ -216,6 +216,7 @@
         }
 
         public function detalles_prestamo(){
+            
             $prestamoId = $_POST['detalle'];
             $data['prestamo'] = $this->user_model->getPrestamoInfo($prestamoId);
             $data['empleadosDB'] = $this->load->database('eusined', TRUE);
@@ -579,8 +580,9 @@
                     redirect('index.php/admin/registrar_prestamo_perm');
                 }else{
                     $this->session->set_flashdata('prestamo_error','Ha habido un error al registrar el préstamo a la base de datos. Inténtelo de nuevo');
-                    redirect('index.php/admin/registrar_prestamo_temp');
+                    redirect('index.php/admin/registrar_prestamo_perm');
                 }
             }
         }
+
     }

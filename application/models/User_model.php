@@ -236,7 +236,9 @@
                 'direccion_idDireccion_fk' => $direccion_id,
                 'instalacion_idInstalacion_fk' => $instalacion_id,
                 'status' => 1
-            );*/    
+            );*/
+            $data['status'] = $this->input->post('estado');
+              
             $this->db->where('idArticulo', $this->input->post('detalle'));
             return $this->db->update('articulo', $data);
         }
@@ -297,7 +299,11 @@
                 'status' => $status
             );
             $this->db->where("idArticulo", $id);
-            $this->db->update("articulo", $data); 
+            if($this->db->update("articulo", $data)){
+                return true;
+            }else{
+                return false;
+            }
         }
 
         public function userRole($id, $rol){

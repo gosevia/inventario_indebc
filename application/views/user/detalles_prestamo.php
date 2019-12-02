@@ -69,22 +69,31 @@
         <div class="prestamos-container">
             <table class="table table-striped table-bordered">
             <th colspan="7">Artículos:</th>
+            <tr class="table-success">
+                <th><strong>ID:</strong><br></th>
+                <th><strong># Inventario:</strong><br></th>
+                <th><strong>Nombre:</strong><br></th>
+                <th><strong>Marca:</strong><br></th>
+                <th><strong>Modelo:</strong><br></th>
+                <th><strong>Estado:</strong><br></th>
+                <th><strong>Detalles:</strong><br></th>
+            </tr>    
             <?php 
             if($articulos){
                 foreach($articulos as $row){
-                    echo "<tr><th><strong>ID:</strong><br>".$row['idArticulo']."</th><th><strong>Estatus:</strong>";
+                    echo "<tr><th>".$row['idArticulo']."</th>";
+                    echo "<th>".$row['num_inventario']."</th><th>".$row['nombre']."</th>";
+                    echo "<th>".$row['marca']."</th><th>".$row['modelo']."</th>";
                     switch($row['status']){
-                        case 0: echo "<br>Baja</th>"; break;
-                        case 1: echo "<br>Activo</th>"; break;
-                        case 2: echo "<br>Prestado</th>"; break; 
+                        case 0: echo "<th id='estado1'>No existe</th>"; break;
+                        case 1: echo "<th id='estado2'>Activo</th>"; break;
+                        case 2: echo "<th id='estado3'>Prestado</th>"; break; 
                     }
-                    echo "<th><strong># de inventario: </strong><br>".$row['num_inventario']."</th><th><strong>Nombre: </strong><br>".$row['nombre']."</th>";
-                    echo "<th><strong>Marca: </strong><br>".$row['marca']."</th><th><strong>Modelo: </strong><br>".$row['modelo']."</th>";
                     echo form_open('index.php/admin/detalles_articulo');
                     echo "<th><input type='hidden' id='detalle' name='detalle' value='".$row['idArticulo']."' />";
-                    echo '<button class="btn btn-outline-primary" type="submit" value=""><i class="fa fa-search" id="submit"></i></button>';
+                    echo '<button class="btn btn-outline-primary" type="submit" value=""><i class="fa fa-search" id="submit"></i></button></th>';
                     echo form_close();
-                    echo "</th></tr>";
+                    echo "</tr>";
                 }
             }
                 

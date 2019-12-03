@@ -1,6 +1,6 @@
 <ul class="nav justify-content-center">
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?php echo base_url(); ?>index.php/admin/reportes">
         <i class="fa "></i> Reportes</a>
     </li>
 

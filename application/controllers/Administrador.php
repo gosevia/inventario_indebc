@@ -585,4 +585,13 @@
             }
         }
 
+        public function reportes(){
+            $data['articulos'] = $this->user_model->getArticulos();
+            $data['usuarios'] = $this->user_model->getAllUsers();
+            $this->load->view('header');
+            $this->load->view('admin/admin');
+            $this->load->view('user/reportes', $data);
+            $this->load->view('footer');
+        }
+
     }

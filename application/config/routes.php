@@ -91,6 +91,7 @@ $route['soporte/registrar_prestamo_perm'] = 'soporte/registrar_prestamo_perm';
 $route['soporte/consultar_articulo'] = 'soporte/consultar_articulo';
 $route['soporte/consultar_prestamo'] = 'soporte/consultar_prestamo';
 $route['soporte/registrar_articulo'] = 'soporte/registrar_articulo';
+$route['soporte/reportes'] = 'soporte/reportes';
 
 $route['user/logout'] = 'user/logout';
 $route['user/login'] = 'user/login';

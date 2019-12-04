@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs justify-content-center">
     <li class="nav-item">
-        <a class="nav-link" href="#">Reportes</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>index.php/soporte/reportes">Reportes</a>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Articulos</a>

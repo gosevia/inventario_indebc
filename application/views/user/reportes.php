@@ -1,18 +1,30 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.6/css/fixedHeader.dataTables.min.css"/>
-<link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.3.0/css/fixedColumns.dataTables.min.css"/>
 
 <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
 
 <script type="text/javascript">
 
     var $ = jQuery.noConflict();
+    var today = new Date();
+    var topMessage = "Texto";
 
+    /* //Intento de conversion de link de logo a canvas para agregar a doc pdf
+    function getBase64Image(img) {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        var dataURL = canvas.toDataURL();
+        return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    }
+
+    var base64 = getBase64Image(document.getElementById("logo"));
+    */
     $(document).ready( function () {
         
         // Setup - add a text input to each footer cell
-       // $('#reportesTable thead tr').clone(true).appendTo( '#reportesTable thead' );
         $('#reportesTable thead tr:eq(1) th').each( function (i) {
             
             if(i>5){
@@ -30,15 +42,67 @@
             }
         } );
 
+        
+
         var table = $('#reportesTable').DataTable( {
             "language": lang_spanish,
             orderCellsTop: true,
             fixedHeader: true,
             scrollY: false,
             scrollX: true,
-            scrollCollapse: true
+            scrollCollapse: true,
+            dom: "<'row'<'col-sm-4'l><'col-sm-4'B><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            buttons: [
+                {
+                    extend: 'pdf',
+                    /*Intento de agregado de logo en doc pdf
+                    customize: function ( doc ) {
+                        doc.content.splice( 1, 0, {
+                            margin: [ 0, 0, 0, 12 ],
+                            alignment: 'center',
+                            image: base64
+                        } );
+                    },*/
+                    text: ' Generar PDF',
+                    className: 'btn btn-outline-dark fa fa-file-text',
+                    filename: 'Reporte de Inventario INDE',
+                    orientation: 'landscape',
+                    title: 'Reporte de Inventario INDE',
+                    messageTop: function(){
+                        topMessage = "El siguiente reporte de inventario fue generado el día "+ today.getDate() +" del mes "+ (today.getMonth()+1) + " del "+ today.getFullYear();
+                        return topMessage;
+                    }
+                    
+                },
+                {
+                    extend: 'excel',
+                    text: ' Generar Excel',
+                    className: 'btn btn-outline-dark fa fa-table',
+                    filename: 'Reporte de Inventario INDE',
+                    orientation: 'landscape',
+                    title: 'Reporte de Inventario INDE',
+                    messageTop: function(){
+                        topMessage = "El siguiente reporte de inventario fue generado el día "+ today.getDate() +" del mes "+ (today.getMonth()+1) + " del "+ today.getFullYear();
+                        return topMessage;
+                    }
+                },
+                {
+                    extend: 'print',
+                    text: ' Imprimir',
+                    className: 'btn btn-outline-dark fa fa-print',
+                    filename: 'Reporte de Inventario INDE',
+                    orientation: 'landscape',
+                    title: 'Reporte de Inventario INDE',
+                    messageTop: function(){
+                        topMessage = "El siguiente reporte de inventario fue generado el día "+ today.getDate() +" del mes "+ (today.getMonth()+1) + " del "+ today.getFullYear();
+                        return topMessage;
+                    }
+                }
+
+            ]
         });
-    
+        
     });
     //<!-- para lenguaje español de la tabla -->
     var lang_spanish = {
@@ -179,9 +243,5 @@
                 ?>
             </tbody>
         </table>
-        <div style="text-align: center; margin-bottom: 50px;">
-            <button type="submit" name="generar_reporte" class="btn btn-outline-dark">
-                <i class="fa fa-file-text"></i> Generar PDF
-            </button>
-        </div>
+        
     </div>

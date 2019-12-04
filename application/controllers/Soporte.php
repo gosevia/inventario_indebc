@@ -516,4 +516,13 @@
             }
         }
 
+        public function reportes(){
+            $data['articulos'] = $this->user_model->getArticulos();
+            $data['usuarios'] = $this->user_model->getAllUsers();
+            $this->load->view('header');
+            $this->load->view('soporte/soporte');
+            $this->load->view('user/reportes', $data);
+            $this->load->view('footer');
+        }
+
     }

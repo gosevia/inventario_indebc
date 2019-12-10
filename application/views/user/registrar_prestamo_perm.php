@@ -59,7 +59,7 @@
                 </div>
                 <div class="row">
                     <div class="col padding">
-                        <button type="submit" name="iniciar" class="btn btn-outline-dark">
+                        <button type="submit" name="iniciar" class="btn btn-success">
                             <i class="fa fa-pencil-square-o"></i> Registrar Préstamo
                         </button>
                     </div>
@@ -79,6 +79,7 @@
                             <th></th>
                             <th scope="col">ID</th>
                             <th scope="col"># de inventario</th>
+                            <th scope="col">Nombre</th>
                             <th scope="col">Marca</th>
                             <th scope="col">Modelo</th>
                             <th scope="col">Dirección</th>
@@ -94,6 +95,7 @@
                             echo "<td></td>";
                             echo "<td>".$row['idArticulo']."</td>";
                             echo "<td>".$row['num_inventario']."</td>";
+                            echo "<td>".$row['nombre']."</td>";
                             echo "<td>".$row['marca']."</td>";
                             echo "<td>".$row['modelo']."</td>";
                             switch($row['direccion_idDireccion_fk']){
@@ -180,10 +182,12 @@
                 }
             },
             order: [[1, 'asc']],
-            dom:'Bfrtip',
+            dom: "<'row'<'col-sm-4'l><'col-sm-4'B><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons:[
                 {
                     text: 'Agregar artículos al préstamo',
+                    className: 'btn btn-outline-dark',
                     action: function (){
                         var count = table.rows('.selected').count();
                         var seleccionados = table.rows('.selected').data().toArray();

@@ -3,9 +3,9 @@
         <div class="detalles-table-container">
             <?php 
                 if($this->session->userdata('rol')==1){
-                    echo form_open('index.php/admin/detalles_prestamo');
+                    echo form_open('index.php/admin/actualizar_prestamo');
                 }else{
-                    echo form_open('index.php/soporte/detalles_prestamo');
+                    echo form_open('index.php/soporte/actualizar_prestamo');
                 } 
             ?>
             <table class="table table-striped table-bordered">
@@ -54,15 +54,34 @@
                 </tr>
                 <tr>
                 <th scope="col">Estado</th>
-                <?php
+                <td>
+                <?php if($this->session->userdata('rol')==3){ 
                     switch($prestamo->status){
-                        case 0: echo "<td>Concluido</td>"; break;
-                        case 1: echo "<td>Temporal</td>"; break;
-                        case 2: echo "<td>Permanente</td>"; break;
+                        case 0: echo "Concluido"; break;
+                        case 1: echo "Temporal"; break;
+                        case 2: echo "Permanente"; break;
                     }
-                ?>
+                }else{
+                    $options = array(
+                        0 => 'Concluido',
+                        1 => 'Temporal',
+                        2 => 'Permanente'
+                    );
+                    echo form_dropdown('estado', $options, $prestamo->status);
+                }?>
+                <td>
                 </tr>  
             </table>
+            <?php if($this->session->userdata('rol')!=3 ){?>
+                <div class="row">
+                <div class="col padding">
+                    <input type='hidden' id='idPrestamo' name='idPrestamo' value='<?php echo $prestamo->idPrestamo; ?>' />
+                    <button type="submit" name="editar" class="btn btn-outline-dark">
+                        <i class="fa fa-pencil-square-o"></i> Guardar cambios
+                    </button>
+                </div>
+            </div>
+            <?php }?>
             <?php echo form_close(); ?>
         </div>
         

@@ -69,5 +69,4 @@
                 redirect(base_url().'index.php/empleado/password/');
             }
         }
-
     }

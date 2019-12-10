@@ -189,4 +189,9 @@
             <?php echo '<p class="alert alert-danger alert-dismissible fade show">
             <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('prestamo_error').'</p>'; ?>
         <?php endif; ?>
+
+        <?php if($this->session->flashdata('cambios_prestamo')): ?>
+            <?php echo '<p class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>' .$this->session->flashdata('cambios_prestamo').'</p>'; ?>
+        <?php endif; ?>
 </div>

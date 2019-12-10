@@ -144,9 +144,12 @@
             $data['status'] = 2;
             $data['empleado_idEmpleado_fk'] = $empId;
             for($i = 0; $i < $count; $i++){
+                //INDICAR EL PRESTAMO ACTUAL EN EL QUE SE ENCUENTRA EL ARTICULO
                 $id = $articulos[$i];
                 $this->db->where('idArticulo', $id);
                 $this->db->update('articulo', $data);
+                //GUARDAR EN EL HISTORIAL DE PRESTAMOS
+                $this->db->insert('prestamo-articulo',array('idPrestamo'=>$prestamoId,'idArticulo'=>$id));
             }
         }
 
@@ -480,10 +483,25 @@
         }
 
         public function getArticulosPrestamo($id){
-            $q = $this->db->get_where('articulo', array('idPrestamo' => $id));
+            //Obtener los articulos de la tabla prestamo-articulo
+            $q = $this->db->get_where('prestamo-articulo', array('idPrestamo' => $id));
+            
             if(empty($q->result())){
                 return null;
             }else{
+                $array = array();
+
+                //Guardar los ids de los articulos ligados al prestamo
+                foreach($q->result() as $row){
+                    $array = array_values($array);
+                    $array[] = $row->idArticulo;   
+                }
+
+                //Seleccionar los articulos correspondientes a su ID
+                $this->db->from('articulo');
+                $this->db->where_in('idArticulo',$array);
+                $q = $this->db->get();
+
                 $r = $q->result_array();
                 return $r;
             }
@@ -503,14 +521,32 @@
             }
         }
 
-        public function detalles_prestamo(){
-            $prestamoId = $_POST['detalle'];
-            $data['prestamo'] = $this->user_model->getPrestamoInfo($prestamoId);
-            $data['empleadosDB'] = $this->load->database('eusined', TRUE);
-            $data['articulos'] = $this->user_model->getArticulosPrestamo($prestamoId);
-            $this->load->view('header');
-            $this->load->view('empleado/empleado');
-            $this->load->view('user/detalles_prestamo', $data);
-            $this->load->view('footer');
+        public function prestamoEstado($idPrestamo, $estado){
+            //Cambiar el estado del prestamo
+            $data = array(
+                'status' => $estado
+            );
+            $this->db->where("idPrestamo", $idPrestamo);
+            $this->db->update("prestamo", $data);
+
+            //Actualizar los articulos involucrados en el prestamo
+            $articulos = $this->db->get_where('articulo', array('idPrestamo' => $idPrestamo));
+
+            
+            if($articulos != null){
+                if($estado==0){
+                    $estadoArt = 1;
+                }else{
+                    $estadoArt = 2;
+                }
+                $data = array(
+                    'status' => $estadoArt,
+                    'idPrestamo' => null
+                );
+                foreach($articulos->result() as $row){
+                    $this->db->where("idArticulo", $row->idArticulo);
+                    $this->db->update("articulo", $data);
+                }
+            }
         }
     }

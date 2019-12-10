@@ -194,7 +194,13 @@
 
         
         public function detalles_prestamo(){
-            $prestamoId = $_POST['detalle'];
+            
+            if(isset($_POST['detalle'])){
+                $prestamoId = $_POST['detalle'];
+            }else{
+                $prestamoId = $this->uri->segment(3);
+            }
+            
             $data['prestamo'] = $this->user_model->getPrestamoInfo($prestamoId);
             $data['empleadosDB'] = $this->load->database('eusined', TRUE);
             $data['articulos'] = $this->user_model->getArticulosPrestamo($prestamoId);
@@ -523,6 +529,18 @@
             $this->load->view('soporte/soporte');
             $this->load->view('user/reportes', $data);
             $this->load->view('footer');
+        }
+
+        public function actualizar_prestamo(){
+            if(isset($_POST['idPrestamo'])){
+                $prestamoId = $_POST['idPrestamo'];
+            }else{
+                $prestamoId = $this->uri->segment(3);
+            }
+            $estado = $_POST['estado'];
+            $this->user_model->prestamoEstado($prestamoId, $estado);
+            $this->session->set_flashdata('cambios_prestamo','Se han guardado los cambios al préstamo');
+            redirect('index.php/soporte/detalles_prestamo/'.$prestamoId);
         }
 
     }

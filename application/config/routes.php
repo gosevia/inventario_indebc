@@ -102,3 +102,5 @@ $route['user'] = 'user/$1';
 $route['default_controller'] = 'user';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['cron/actualizarPrestamo'] = 'cron/actualizarPrestamo';

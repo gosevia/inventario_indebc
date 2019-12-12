@@ -92,23 +92,25 @@
                     <label class="font-weight-bold">Recibo</label>
                     <input type="file" class="form-control" name="recibos[]" multiple value="<?php echo set_value('recibos[]');?>">
                     <br>
-                    <p style="background-color:#99ccff; border-left: 6px solid blue;">Se pueden registrar un máximo de 3 imágenes para el recibo. Las extensiones permitidas son: .jpg, .jpeg y .png</p>
+                    <p style="background-color:#EF648E; border-left: 10px solid #691B33; padding-left: 5px" class="font-weight-bold">
+                        Se pueden registrar un máximo de 3 imágenes para el recibo. Las extensiones permitidas son: .jpg, .jpeg y .png
+                    </p>
                 </div>
                 <div class ="form-group">
                     <label class="font-weight-bold">Foto(s)</label>
                     <input type="file" class="form-control" name="files[]" multiple value="<?php echo set_value('files[]');?>">
                     <br>
-                    <p style="background-color:#99ccff; border-left: 6px solid blue;">Se pueden registrar un máximo de 3 imágenes para las fotos. Las extensiones permitidas son: .jpg, .jpeg y .png</p>
+                    <p style="background-color:#EF648E; border-left: 10px solid #691B33; padding-left: 5px" class="font-weight-bold">Se pueden registrar un máximo de 3 imágenes para las fotos. Las extensiones permitidas son: .jpg, .jpeg y .png</p>
                 </div>
                 <div class ="form-group">
                     <label class="font-weight-bold">Documento de resguardo</label>
                     <input type="file" class="form-control" name="userfile" value="<?php echo set_value('userfile');?>">
                     <br>
-                    <p style="background-color:#99ccff; border-left: 6px solid blue;">Se puede registrar sólo una imágen ó archivo. Las extensiones permitidas son: .jpg, .jpeg, .png y .pdf</p>
+                    <p style="background-color:#EF648E; border-left: 10px solid #691B33; padding-left: 5px" class="font-weight-bold">Se puede registrar sólo una imágen ó archivo. Las extensiones permitidas son: .jpg, .jpeg, .png y .pdf</p>
                 </div>
                 <div class="row">
                     <div class="col padding">
-                        <button type="submit" name="iniciar" class="btn btn-outline-dark">
+                        <button type="submit" name="iniciar" class="btn btn-outline-dark" onclick="return confirm('¿Está seguro que quiere registrar el artículo?');">
                             <i class="fa fa-pencil-square-o"></i> Registrar
                         </button>
                     </div>

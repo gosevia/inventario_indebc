@@ -194,7 +194,9 @@
 
         
         public function detalles_prestamo(){
-            
+            //EVITA MENSAJE DE RESUBMISSION AL MOMENTO DE IR HACIA ATRAS EN LA PAGINA 
+            header("Cache-Control: max-age=300, must-revalidate"); 
+
             if(isset($_POST['detalle'])){
                 $prestamoId = $_POST['detalle'];
             }else{
@@ -261,6 +263,9 @@
         }
 
         public function editar_articulo(){
+            //EVITA MENSAJE DE RESUBMISSION AL MOMENTO DE IR HACIA ATRAS EN LA PAGINA 
+            header("Cache-Control: max-age=300, must-revalidate"); 
+
             $this->form_validation->set_rules('actualizar','Actualizar','required');
             if(isset($_POST['detalle'])){
                 $articuloId = $_POST['detalle'];
@@ -532,6 +537,9 @@
         }
 
         public function actualizar_prestamo(){
+            //EVITA MENSAJE DE RESUBMISSION AL MOMENTO DE IR HACIA ATRAS EN LA PAGINA 
+            header("Cache-Control: max-age=300, must-revalidate"); 
+            
             if(isset($_POST['idPrestamo'])){
                 $prestamoId = $_POST['idPrestamo'];
             }else{

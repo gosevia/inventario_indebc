@@ -11,7 +11,7 @@ class Cron extends CI_Controller
     }
     
     /**
-     * This function is used to update the age of users automatically
+     * This function is used to update the PRESTAMOS STATUS automatically
      * This function is called by cron job once in a day at midnight 00:00
      */
     public function actualizarPrestamo()

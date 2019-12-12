@@ -11,7 +11,8 @@
                     <th scope="col">Dirección</th>
                     <th scope="col">Instalación</th>
                     <th scope="col">Estado</th>
-                    <th scope="col"></th>
+                    <th scope="col">Detalles artículo</th>
+                    <th scope="col">Detalles préstamo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,15 +67,33 @@
                         case 1: echo "<td id='estado2'>Activo</td>"; break;
                         case 2: echo "<td id='estado3'>Prestado</tc>"; break; 
                     }
+
+                    //BOTON DETALLES ARTICULO
                     echo '<td>';
                     if($this->session->userdata('rol')==1){
                         echo form_open('index.php/admin/detalles_articulo');
                     }else{
                         echo form_open('index.php/soporte/detalles_articulo');
                     }
+                    
                     echo "<input type='hidden' id='detalle' name='detalle' value='".$row['idArticulo']."' />";
                     echo '<button class="btn btn-outline-primary" type="submit" value=""><i class="fa fa-search" id="submit"></i></button>';
                     echo form_close();
+                    echo "</td>";
+                    //BOTON DETALLES PRESTAMO
+                    echo '<td>';
+                    if($row['status'] == 2){
+                        
+                        if($this->session->userdata('rol')==1){
+                            echo form_open('index.php/admin/detalles_prestamo/'.$row['idPrestamo']);
+                        }else{
+                            echo form_open('index.php/soporte/detalles_prestamo/'.$row['idPrestamo']);
+                        }
+                        echo "<input type='hidden' id='detalle' name='detalle' value='".$row['idPrestamo']."' />";
+                        echo '<button class="btn btn-outline-primary" type="submit" value=""><i class="fa fa-search" id="submit"></i></button>';
+                        echo form_close();
+                        
+                    }
                     echo "</td>";
                     echo "</tr>";           
                 }

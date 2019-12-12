@@ -59,7 +59,7 @@
                 </div>
                 <div class="row">
                     <div class="col padding">
-                        <button type="submit" name="iniciar" class="btn btn-success">
+                        <button type="submit" name="iniciar" class="btn btn-success" onclick="return confirm('¿Está seguro que quiere registrar este préstamo?')">
                             <i class="fa fa-pencil-square-o"></i> Registrar Préstamo
                         </button>
                     </div>
@@ -68,8 +68,8 @@
         </div>
 
         <div class="consultar-table-container" style="margin-bottom:5rem;">
-            <p style="background-color:#99ccff; border-left: 6px solid blue;" class="font-weight-bold">
-                Utiliza la siguiente tabla para seleccionar los artículos deseados. Una vez seleccionados, presiona "Agregar articulos al préstamo".
+            <p style="background-color:#EF648E; border-left: 10px solid #691B33; padding-left: 5px" class="font-weight-bold">
+                Utiliza la siguiente tabla para seleccionar los artículos deseados. Una vez seleccionados, presiona "Agregar artículos al préstamo".
                 No será posible seleccionar los artículos ya prestados.
             </p>
 

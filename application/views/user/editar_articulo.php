@@ -150,7 +150,7 @@
                     <?php endforeach; ?>
                     <input type="file" class="form-control" name="recibos[]" multiple value="<?php echo set_value('recibos[]');?>">
                     <br>
-                    <p style="background-color:#99ccff; border-left: 6px solid blue;">Se pueden registrar un máximo de 3 imágenes para el recibo. Las extensiones permitidas son: .jpg, .jpeg y .png</p>
+                    <p style="background-color:#EF648E; border-left: 10px solid #691B33; padding-left: 5px" class="font-weight-bold">Se pueden registrar un máximo de 3 imágenes para el recibo. Las extensiones permitidas son: .jpg, .jpeg y .png</p>
                 </div>
                 <div class ="form-group">
                     <label class="font-weight-bold">Foto(s)</label><br />
@@ -162,20 +162,20 @@
                     <?php endforeach; ?>
                     <input type="file" class="form-control" name="files[]" multiple value="<?php echo set_value('files[]');?>">
                     <br>
-                    <p style="background-color:#99ccff; border-left: 6px solid blue;">Se pueden registrar un máximo de 3 imágenes para las fotos. Las extensiones permitidas son: .jpg, .jpeg y .png</p>
+                    <p style="background-color:#EF648E; border-left: 10px solid #691B33; padding-left: 5px" class="font-weight-bold">Se pueden registrar un máximo de 3 imágenes para las fotos. Las extensiones permitidas son: .jpg, .jpeg y .png</p>
                 </div>
                 <div class ="form-group">
                     <label class="font-weight-bold">Documento de resguardo</label><br />
                     <a href="<?php echo base_url('uploads/resguardo/'.$resguardo->file_name); ?>" target="_blank">Ver documento</a>
                     <input type="file" class="form-control" name="userfile" value="<?php echo set_value('userfile');?>">
                     <br>
-                    <p style="background-color:#99ccff; border-left: 6px solid blue;">Subir archivo para reemplazar el actual. Las extensiones permitidas son: .jpg, .jpeg, .png y .pdf</p>
+                    <p style="background-color:#EF648E; border-left: 10px solid #691B33; padding-left: 5px" class="font-weight-bold">Subir archivo para reemplazar el actual. Las extensiones permitidas son: .jpg, .jpeg, .png y .pdf</p>
                 </div>
                 <div class="row">
                     <div class="col padding">
                         <input type='hidden' id='detalle' name='detalle' value='<?php echo $articulo->idArticulo; ?>' />
                         <input type='hidden' id='actualizar' name='actualizar' value='ready' />
-                        <button type="submit" name="iniciar" class="btn btn-outline-dark">
+                        <button type="submit" name="iniciar" class="btn btn-outline-dark" onclick="return confirm('¿Está seguro de realizar los cambios a este artículo?');">
                             <i class="fa fa-pencil-square-o"></i> Actualizar
                         </button>
                     </div>

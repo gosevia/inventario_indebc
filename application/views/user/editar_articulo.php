@@ -89,6 +89,11 @@
                             case 18:
                             case 24:
                             case 30: $currentDir = "Dirección de Infraestructura Deportiva"; break;
+                            case 31:
+                            case 32:
+                            case 33:
+                            case 34:
+                            case 35: $currentDir = "Dirección de Proyectos Especiales"; break;
                         }
                         echo form_dropdown('direccion', $options, $currentDir, "class='form-control'");
                         ?>
@@ -170,6 +175,10 @@
                     <input type="file" class="form-control" name="userfile" value="<?php echo set_value('userfile');?>">
                     <br>
                     <p style="background-color:#EF648E; border-left: 10px solid #691B33; padding-left: 5px" class="font-weight-bold">Subir archivo para reemplazar el actual. Las extensiones permitidas son: .jpg, .jpeg, .png y .pdf</p>
+                </div>
+                <div class ="form-group">
+                    <label class="font-weight-bold">Descripción</label>
+                    <textarea class="form-control" name="descripcion"  value="<?php echo set_value('descripcion');?>"><?php if($articulo->descripcion != null) {echo $articulo->descripcion;} ?></textarea>
                 </div>
                 <div class="row">
                     <div class="col padding">

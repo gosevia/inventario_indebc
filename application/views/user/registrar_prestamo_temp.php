@@ -61,6 +61,10 @@
                         
                     </select>
                 </div>
+                <div class ="form-group">
+                    <label class="font-weight-bold">Observaciones</label>
+                    <textarea class="form-control" name="observaciones"  value="<?php echo set_value('observaciones');?>"></textarea>
+                </div>
                 <div class="row">
                     <div class="col padding">
                         <button type="submit" name="iniciar" class="btn btn-success" onclick="return confirm('¿Está seguro que quiere registrar este préstamo?')">

@@ -54,6 +54,11 @@
                         case 18:
                         case 24:
                         case 30: echo "<td>Dirección de Infraestructura Deportiva</td>"; break;
+                        case 31:
+                        case 32:
+                        case 33:
+                        case 34:
+                        case 35: echo "<td>Dirección de Proyectos Especiales</td>"; break;
                     }
                     switch($row['instalacion_idInstalacion_fk']){
                         case 1: echo "<td>CAR Tijuana</td>"; break;

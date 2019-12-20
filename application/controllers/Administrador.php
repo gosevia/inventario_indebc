@@ -618,7 +618,8 @@
                 $prestamoId = $this->uri->segment(3);
             }
             $estado = $_POST['estado'];
-            $this->user_model->prestamoEstado($prestamoId, $estado);
+            $observacion = $_POST['observaciones'];
+            $this->user_model->actualizarPrestamo($prestamoId, $estado,$observacion);
             $this->session->set_flashdata('cambios_prestamo','Se han guardado los cambios al préstamo');
             redirect('index.php/admin/detalles_prestamo/'.$prestamoId);
         }

@@ -71,7 +71,8 @@
                 'direccion_idDireccion_fk'=> $direccion_id,
                 'instalacion_idInstalacion_fk'=> $instalacion_id,
                 'edificio'=> $this->input->post('edificio'),
-                'status'=> 1
+                'status'=> 1,
+                'descripcion' => $this->input->post('descripcion')
             );
 
             return $this->db->insert('articulo',$data);
@@ -121,7 +122,8 @@
                 'encargado_fk'=> $encargadoId,
                 'prestamista_fk'=> $prestamistaId,
                 'empleado_fk'=> $empleadoId,
-                'status'=>$tipo
+                'status'=>$tipo,
+                'observaciones'=>$this->input->post('observaciones')
             );
 
             return $this->db->insert('prestamo',$data);
@@ -228,7 +230,7 @@
                 'status' => 1
             );*/
             $data['status'] = $this->input->post('estado');
-              
+            $data['descripcion'] = $this->input->post('descripcion');
             $this->db->where('idArticulo', $this->input->post('detalle'));
             return $this->db->update('articulo', $data);
         }
@@ -521,10 +523,11 @@
             }
         }
 
-        public function prestamoEstado($idPrestamo, $estado){
+        public function actualizarPrestamo($idPrestamo, $estado, $observacion){
             //Cambiar el estado del prestamo
             $data = array(
-                'status' => $estado
+                'status' => $estado,
+                'observaciones' => $observacion
             );
             $this->db->where("idPrestamo", $idPrestamo);
             $this->db->update("prestamo", $data);

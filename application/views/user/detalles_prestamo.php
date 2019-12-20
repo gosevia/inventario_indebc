@@ -53,6 +53,12 @@
                 echo $nombreStr; ?></td>
                 </tr>
                 <tr>
+                <th scope="row">Observaciones</th>
+                <td>
+                <textarea class="form-control" name="observaciones"  value="<?php echo set_value('observaciones');?>"><?php if($prestamo->observaciones != null) {echo $prestamo->observaciones;} ?></textarea>
+                </td>
+                </tr>
+                <tr>
                 <th scope="col">Estado</th>
                 <td>
                 <?php if($this->session->userdata('rol')==3){ 

@@ -62,6 +62,7 @@
                             <option value = 'Dirección Promoción e Imagen'>Dirección Promoción e Imagen</option>
                             <option value = 'Dirección de Desarrollo del Deporte'>Dirección de Desarrollo del Deporte</option>
                             <option value = 'Dirección de Infraestructura Deportiva'>Dirección de Infraestructura Deportiva</option>
+                            <option value = 'Dirección de Proyectos Especiales'>Dirección de Proyectos Especiales</option>
                         </select>
                     </div>  
                 </div>
@@ -107,6 +108,11 @@
                     <input type="file" class="form-control" name="userfile" value="<?php echo set_value('userfile');?>">
                     <br>
                     <p style="background-color:#EF648E; border-left: 10px solid #691B33; padding-left: 5px" class="font-weight-bold">Se puede registrar sólo una imágen ó archivo. Las extensiones permitidas son: .jpg, .jpeg, .png y .pdf</p>
+                </div>
+                <div class ="form-group">
+                    <label class="font-weight-bold">Descripción</label><br>
+                    <label class="font-italic">(Añade una breve descripción si es necesario)</label>
+                    <textarea class="form-control" name="descripcion"  value="<?php echo set_value('descripcion');?>"></textarea>
                 </div>
                 <div class="row">
                     <div class="col padding">

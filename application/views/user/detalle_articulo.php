@@ -81,6 +81,11 @@
                     case 18:
                     case 24:
                     case 30: echo "<td>Dirección de Infraestructura Deportiva</td>"; break;
+                    case 31:
+                    case 32:
+                    case 33:
+                    case 34:
+                    case 35: echo "<td>Dirección de Proyectos Especiales</td>"; break;
                 }
             ?>
             </tr>
@@ -95,6 +100,10 @@
                     case 5: echo "<td>CAR San Felipe</td>"; break;
                 }
             ?>
+            </tr>
+            <tr>
+            <th scope="row">Descripción</th>
+            <td><?php if($articulo->descripcion != null) {echo $articulo->descripcion;} ?></td>
             </tr>
             <tr>
             <th scope="row">Documento de resguardo</th>
